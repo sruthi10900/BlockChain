@@ -12,7 +12,7 @@
 <body ng-app="dashboardApp" ng-controller="dashboardCtrl">
 
     <!-- Log in page -->
-    <div ng-show="!isLoggedIn && !isRegister">
+    <div ng-show="!isLoggedIn">
         <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
             <div id="formContent">
                 <h2>BlockChain</h2>
@@ -21,29 +21,7 @@
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logIn()">
-                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div ng-show="!isLoggedIn && isRegister">
-        <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
-            <div id="formContent">
-                <h2>BlockChain</h2>
-                <div>
-                    <input type="text" id="fname" class="fadeIn first" name="fname" ng-model="fname"
-                    placeholder="FirstName">
-                <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
-                    placeholder="LastName">
-                    <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
-                        placeholder="Username">
-                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
-                        placeholder="Password">
-                    
-                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInTransport()">
 
                 </div>
             </div>
@@ -71,23 +49,8 @@
         </div>
         <div ng-show="!isSubmitted">
             <div class="my-main-container">
-                <input type="text" id="FirstName" class="fadeIn first" name="username" ng-model="username"
-                    placeholder="Username" disabled=true>
-                <br>
-                POid<input type="text" id="username" class="fadeIn first" name="poid" ng-model="poid" placeholder="POID"
-                    size="20"><br>
-                Ship To<input type="text" id="shipTo" class="fadeIn first" name="shipTo" ng-model="shipTo"
-                    placeholder="Ship To" size="20"><br>
-                Ship Via<input type="text" id="shipVia" class="fadeIn first" name="shipVia" ng-model="shipVia"
-                    placeholder="Ship Via" size="20"><br>
-                <div id="dynamicInput">
-                    Item Type<input type="text" id="itemType" class="fadeIn first" name="itemType" ng-model="itemType"
-                        placeholder="Item Type" size="20"><br>
-                    Qty<input type="text" id="qty" class="fadeIn first" name="qty" ng-model="qty" placeholder="Quantity"
-                        size="3">
-                </div>
-                <input type="button" class="fadeIn third" value="Submit" ng-click="addProduct()">
-
+                 Transporter Logged In!!
+                 Fetching Details
                 
             </div>
         </div>

@@ -11,8 +11,22 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 callback(response);
             });
         };
+
+        service.loginTransport = function(username, password, callback) {
+            var parms = {username, password}
+            $http.post("http://localhost:5000/api/authenticatetransport", JSON.stringify(parms)).then(function(response){
+                callback(response);
+            });
+        };
+
+        service.register = function(fname,lname,username,password,callback){
+            var parms = {fname,lname,username, password}
+            $http.post("http://localhost:5000/api/register", JSON.stringify(parms)).then(function(response){
+                callback(response);
+            });
+        };
         // service.setCredentials = function(username, password) {
-        //     var authdata = btoa(username + ':' + password);
+        //     var authdata = btoa(username + ':' + password);*
  
         //     $rootScope.globals = {
         //         currentUser: {

@@ -8,6 +8,49 @@ app.controller('dashboardCtrl',
             AuthenticationService.login($scope.username, $scope.password, function (response) {
                 console.log(response)
                 if (response.data.status == "success") {
+                    $rootScope.isusaid = true;
+                    $rootScope.isLoggedIn = true;
+                    $rootScope.token = response.data.token
+                    // AuthenticationService.setCredentials($scope.username, $scope.password);
+                } else {
+                    $scope.error = response.message;
+                    alert("Invalid creds");
+                    $scope.dataLoading = false;
+                }
+            });
+        };
+
+        $scope.register = function(){
+            $rootScope.isRegister = true;
+           
+        }
+
+        $scope.submit = function(){
+            $rootScope.isRegister = true;
+            AuthenticationService.register($scope.fname, $scope.lname, $scope.username, $scope.password,function(response){
+                console.log(response);
+                if (response.status == 200) {
+                    
+                    $rootScope.isLoggedIn = false;
+                    $rootScope.isRegister=false;
+                    // AuthenticationService.setCredentials($scope.username, $scope.password);
+                } else {
+                    $scope.error = response.message;
+                    alert("Registration Failed");
+                    $scope.dataLoading = false;
+                }
+            }
+            );
+        }
+
+
+        $scope.logInTransport = function () {
+            console.log("helloo");
+            $scope.dataLoading = true;
+            AuthenticationService.loginTransport($scope.username, $scope.password, function (response) {
+                console.log(response)
+                if (response.data.status == "success") {
+                    $rootScope.isTransport = true;
                     $rootScope.isLoggedIn = true;
                     $rootScope.token = response.data.token
                     // AuthenticationService.setCredentials($scope.username, $scope.password);
