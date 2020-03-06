@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-cookies.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="loginpage.css">
+<link rel="stylesheet" href="mystyles.css">
+
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl">
+
+    <!-- Log in page -->
+    <div ng-show="!isLoggedIn && !isRegister">
+        <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
+            <div id="formContent">
+                <h2>BlockChain</h2>
+                <div>
+                    <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
+                        placeholder="Username">
+                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                        placeholder="Password">
+                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!isLoggedIn && isRegister">
+        <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
+            <div id="formContent">
+                <h2>BlockChain</h2>
+                <div>
+                    <input type="text" id="fname" class="fadeIn first" name="fname" ng-model="fname"
+                    placeholder="FirstName">
+                <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
+                    placeholder="LastName">
+                    <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
+                        placeholder="Username">
+                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                        placeholder="Password">
+                    
+                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- END: Log in page -->
+    <!-- Main page -->
+    <div ng-show="isLoggedIn">
+        <div class="my-side-nav">
+            <!-- <span class="my-icon"><i class=" fas fa-user"></i></span><br/> -->
+            <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
+                        class=" fas fa-power-off"></i></a></span>
+        </div>
+        <!-- <div class="my-main-container">
+            Yipeeyy!! Logged In
+        </div> -->
+        <div ng-show="isSubmitted">
+            <div class="my-main-container">
+                Yipeeyy!! Submitted
+            </div>
+        </div>
+        <div ng-show="!isSubmitted && !fetched">
+            <div class="my-main-container">
+                 Transporter Logged In!!
+                 Fetching Details
+                 <input type="text" id="poid" class="fadeIn second" name="poid" ng-model="poid"
+                 placeholder="poid">
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                
+            </div>
+        </div>
+
+        <div ng-show="!isSubmitted && fetched">
+            <div class="my-main-container">
+                 Details Of the POID
+                 <p>POID </p>
+                 <p>Item Type</p>
+                 <p>Quantity</p>
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
+                
+            </div>
+        </div>
+
+    </div>
+
+    <!-- END: Main page -->
+
+    <!-- Angular js -->
+    <script src="dashboardApp.js"></script>
+    <script src="authenticationService.js"></script>
+    <script src="dashboardController.js"></script>
+    <script src="ngoService.js"></script>
+    <!-- Boot strap js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
