@@ -115,11 +115,12 @@ class AthenticationWarehouse(Resource):
             if username not in database['users']:
                 return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}
             if database['users'][username]['password'] == password:
+                print("hello")
                 #Call the blockchain register api
                 parameters = {
                     "type": "user", 
                     "username" : username,
-                    "orgName" : "Transporter",
+                    "orgName" : "Warehouse",
                     "role": "client",
                     "attrs":[
                         {
@@ -128,9 +129,9 @@ class AthenticationWarehouse(Resource):
                             "ecert": True
                         }
                     ],
-                    "secret":"c5649bb423d7793ddd6941ffa55e14ce"
+                    "secret":"e9031e72c63bb3acea2752a185403a7b"
                 }
-                resp = requests.post('http://34.95.15.17:4000/users/register', json=parameters)
+                resp = requests.post('http://35.203.75.224:4000/users/register', json=parameters)
                 if resp.status_code == 200:
                     data = resp.json()
                     status = data['success']
@@ -160,6 +161,7 @@ def initialize():
     api.add_resource(AthenticationTransport, "/api/authenticatetransport")
     api.add_resource(AthenticationWarehouse, "/api/authenticatewarehouse")
     api.add_resource(Registration, "/api/register")
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
+    # app.run()
 
 initialize()

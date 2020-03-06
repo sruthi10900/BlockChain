@@ -18,13 +18,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 callback(response);
             });
 
-            service.loginWarehouse = function(username, password, callback) {
-                var parms = {username, password}
-                $http.post("http://localhost:5000/api/authenticatewarehouse", JSON.stringify(parms)).then(function(response){
-                    callback(response);
-                });
-           
-
+          
            
             // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
             //     callback(response);
@@ -32,7 +26,15 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
 
         };
 
-        service.fetchDetails = function(poid,callback){
+        service.loginWarehouse = function(username, password, callback) {
+            var parms = {username, password}
+            $http.post("http://localhost:5000/api/authenticatewarehouse", JSON.stringify(parms)).then(function(response){
+                callback(response);
+            });
+       
+        }
+
+        service.fetchDetails = function(packingLabelList,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -40,17 +42,64 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
-              var x = poid.toString();
+              var x = packingLabelList.toString();
             $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 success = true;
                 message = "Submit succes";
-                callback({success: success, message: message});
+                if(response.data.Status == "Recievd  to Transporter"){
+        
+                    message = "Already Processed";
+                }
+                else if(response.data.Status == "Submitted"){
+        
+                    message = "Submit succes";
+                }
+                else{
+                    message = "cannot Process at the moment"
+                }
+                callback({success: success, message: message, data:response.data});
                 }
                 else{
                     callback({success: false, message: "Submit Failed"});
                 }
+            });
+        }
+
+        service.fetchDetailsWarehouse = function(packingLabelList,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+              var x = packingLabelList.toString();
+            $http.get("http://35.203.75.224:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.warehouse.example.com&args=[\""+x+"\"]", config).then(function(response){
+                if(response.status == 200){
+                    console.log(response);
+                
+                success = true;
+                message = "Submit succes";
+                if(response.data.Status == "Recievd  to Warehouse"){
+        
+                    message = "Already Processed";
+                }
+                else if(response.data.Status == "Recievd  to Transporter"){
+        
+                    message = "Submit succes";
+                }
+                else{
+                    message = "cannot Process at the moment"
+                }
+                callback({success: success, message: message, data:response.data});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+                
+                
             });
         }
 
@@ -82,7 +131,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         //     // $http.defaults.headers.common.Authorization = 'Basic ';
         // };
 
-        service.addProduct = function(poid,shipTo,shipVia,itemType,quantity,callback){
+        service.addProduct = function(packingLabelList,shipTo,shipVia,itemType,quantity,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -93,7 +142,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
             var parameter = JSON.stringify({
                 "peers":["peer0.machine1.ngo.example.com"],
                 "fcn":"insertAsset",
-                "args":[poid,"Digital Vibes","12/02/2020",shipTo,"NGOTo",shipVia,"MTransports","Null","1 day","13/02/2020",
+                "args":[packingLabelList,"Digital Vibes","12/02/2020",shipTo,"NGOTo",shipVia,"MTransports","Null","1 day","13/02/2020",
                 "1",itemType,quantity,"15","17","15","2","Null","Null","None","Submitted"]
                 });
 
@@ -115,7 +164,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         }
 
 
-        service.recievedTransport = function(poid,callback){
+        service.recievedTransport = function(packingLabelList,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -128,7 +177,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
 	
                     "peer":["peer0.machine1.transporter.example.com"],
                     "fcn":"updateAssetStatus",
-                    "args":[poid,"Recievd  to Transporter"]
+                    "args":[packingLabelList,"Recievd  to Transporter"]
     });
 
 
@@ -148,10 +197,45 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
               });
         }
 
-    return service;
-    }
 
+        service.recievedWarehouse = function(packingLabelList,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+            var parameter = JSON.stringify({
+                
+	
+                    "peer":["peer0.machine1.warehouse.example.com"],
+                    "fcn":"updateAssetStatus",
+                    "args":[packingLabelList,"Recievd  to Warehouse"]
+    });
+
+
+            $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+                // First function handles success
+                // $scope.content = response.data;
+                console.log(response);
+                if(response.data.success){
+                    console.log(response.data.success);
+                success = true;
+                message = "Submit succes";
+               
+                                callback({success: success, message: message});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+              });
+        }
+
+    return service;
     
+
+}
    
 ]);
 

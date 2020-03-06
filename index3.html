@@ -70,23 +70,47 @@
                 Yipeeyy!! Submitted
             </div>
         </div>
+        <div ng-show="processed">
+            <div class="my-main-container">
+                Already Processed
+            </div>
+        </div>
+        <div ng-show="recieved">
+            <div class="my-main-container">
+                Cant be accessed at this moment
+            </div>
+        </div>
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                 Transporter Logged In!!
+                 Warehouse Logged In!!
                  Fetching Details
-                 <input type="text" id="poid" class="fadeIn second" name="poid" ng-model="poid"
-                 placeholder="poid">
+                 <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
+                 placeholder="packingLabelList">
                  <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
                 
             </div>
         </div>
 
-        <div ng-show="!isSubmitted && fetched">
+        <div ng-show="!isSubmitted && fetched && !processed && !recieved">
             <div class="my-main-container">
                  Details Of the POID
-                 <p>POID </p>
-                 <p>Item Type</p>
-                 <p>Quantity</p>
+                 <table style="width:100%">
+                    <tr>
+                      <th>POID</th>
+                      <th>ItemType</th>
+                      <th>Qunatity</th>
+                      <th>Check</th>
+                      <th>Note</th>
+                    </tr>
+                    <tr>
+                      <td> {{warehouseChecklist.Poid}}</td>
+                      <td> {{warehouseChecklist.ProductName}}</td>
+                      <td> {{warehouseChecklist.Qty}}</td>
+                      <td> <input type="checkbox" id={{warehouseChecklist.ProductName}} name={{warehouseChecklist.ProductName}} value={{warehouseChecklist.ProductName}}></td>
+                      <td> Comments</td>
+                    </tr>
+                  
+                  </table>
                  <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
                 
             </div>

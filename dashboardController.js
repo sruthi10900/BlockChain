@@ -2,7 +2,7 @@
 app.controller('dashboardCtrl',
     function ($scope, $rootScope, AuthenticationService) {
         $rootScope.isLoggedIn = false;
-var poid ;
+var packingLabelList ;
         $scope.logIn = function () {
             $scope.dataLoading = true;
             AuthenticationService.login($scope.username, $scope.password, function (response) {
@@ -67,7 +67,7 @@ var poid ;
         $scope.logInWarehouse = function () {
             console.log("helloo");
             $scope.dataLoading = true;
-            AuthenticationService.logInWarehouse($scope.username, $scope.password, function (response) {
+            AuthenticationService.loginWarehouse($scope.username, $scope.password, function (response) {
                 console.log(response)
                 if (response.data.status == "success") {
                     $rootScope.isTransport = true;
@@ -85,19 +85,49 @@ var poid ;
         };
 
         $scope.fetchDetails = function(){
-            AuthenticationService.fetchDetails($scope.poid,function(response){
+            AuthenticationService.fetchDetails($scope.packingLabelList,function(response){
                 
                 console.log(response);
                 if(response.success){
                     console.log(response);
                     $rootScope.fetched = true;
+                    $rootScope.processed=false;
+                    $scope.transportChecklist = response.data;
+                    $rootScope.recieved = false;
+                }
+                if(response.message == "Already Processed"){
+                    $rootScope.processed = true;
+                }
+                if(response.message == "cannot Process at the moment"){
+                    $rootScope.recieved = true;
+                }
+            })
+        }
+
+
+        $scope.fetchDetailsWarehouse = function(){
+            AuthenticationService.fetchDetailsWarehouse($scope.packingLabelList,function(response){
+                
+                console.log(response);
+                if(response.success){
+                    console.log(response);
+                    $rootScope.processed=false;
+                    $rootScope.fetched = true;
+                    $rootScope.recieved = false;
+                    $scope.warehouseChecklist = response.data
+                }
+                if(response.message == "Already Processed"){
+                    $rootScope.processed = true;
+                }
+                if(response.message == "cannot Process at the moment"){
+                    $rootScope.recieved = true;
                 }
             })
         }
 
         $scope.addProduct = function () {
             $scope.dataLoading = true;
-            AuthenticationService.addProduct($scope.poid, $scope.shipTo, $scope.shipVia, $scope.itemType, $scope.qty, function (response) {
+            AuthenticationService.addProduct($scope.packingLabelList, $scope.shipTo, $scope.shipVia, $scope.itemType, $scope.qty, function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                     console.log("data entered");
@@ -114,7 +144,7 @@ var poid ;
         $scope.recievedTransport = function () {
             $scope.dataLoading = true;
             console.log("jekj");
-            AuthenticationService.recievedTransport($scope.poid,function (response) {
+            AuthenticationService.recievedTransport($scope.packingLabelList,function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                     console.log("data entered");
@@ -126,6 +156,24 @@ var poid ;
             })
         };
 
+
+        
+        $scope.recievedWarehouse = function () {
+            $scope.dataLoading = true;
+            console.log("jekj");
+            AuthenticationService.recievedWarehouse($scope.packingLabelList,function (response) {
+                if (response.success) {
+                    $rootScope.isSubmitted = true;
+                  
+                    console.log("data entered");
+                } else {
+                    $scope.error = response.message;
+                    alert(response.message);
+                    $scope.dataLoading = false;
+                }
+               
+            })
+        };
 
 
         $scope.logOut = function () {
