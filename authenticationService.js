@@ -17,10 +17,46 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
             $http.post("http://localhost:5000/api/authenticatetransport", JSON.stringify(parms)).then(function(response){
                 callback(response);
             });
+
+            service.loginWarehouse = function(username, password, callback) {
+                var parms = {username, password}
+                $http.post("http://localhost:5000/api/authenticatewarehouse", JSON.stringify(parms)).then(function(response){
+                    callback(response);
+                });
+           
+
+           
+            // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
+            //     callback(response);
+            // });
+
         };
+
+        service.fetchDetails = function(poid,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+              var x = poid.toString();
+            $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
+                if(response.status == 200){
+                    console.log(response);
+                success = true;
+                message = "Submit succes";
+                callback({success: success, message: message});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+            });
+        }
 
         service.register = function(fname,lname,username,password,callback){
             var parms = {fname,lname,username, password}
+            
             $http.post("http://localhost:5000/api/register", JSON.stringify(parms)).then(function(response){
                 callback(response);
             });
@@ -78,11 +114,50 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
               });
         }
 
+
+        service.recievedTransport = function(poid,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+            var parameter = JSON.stringify({
+                
+	
+                    "peer":["peer0.machine1.transporter.example.com"],
+                    "fcn":"updateAssetStatus",
+                    "args":[poid,"Recievd  to Transporter"]
+    });
+
+
+            $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+                // First function handles success
+                // $scope.content = response.data;
+                console.log(response);
+                if(response.data.success){
+                    console.log(response.data.success);
+                success = true;
+                message = "Submit succes";
+                callback({success: success, message: message});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+              });
+        }
+
     return service;
     }
 
+    
    
 ]);
+
+
+
+
 
 // User $http to do a rest call
             /*var parameter = JSON.stringify({type:"user", username : username,

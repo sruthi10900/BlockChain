@@ -5,7 +5,7 @@ import requests
 
 app = Flask(__name__)
 api = Api(app)
-
+poid = 1
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 database = {
     "users": {
@@ -26,6 +26,7 @@ database = {
         }
     }
 }
+
 
 # Authenticate username and password
 class Athentication(Resource):
@@ -100,6 +101,42 @@ class AthenticationTransport(Resource):
                     if status:
                         token = data['token']
                         return {"status": "success", "token": token}, 201, {'Access-Control-Allow-Origin': '*'} 
+        return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'} 
+
+class AthenticationWarehouse(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("username")
+        parser.add_argument("password")
+        args = parser.parse_args()
+        username =  args['username']
+        password = args['password']
+        if username != None and password != None:
+            if username not in database['users']:
+                return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}
+            if database['users'][username]['password'] == password:
+                #Call the blockchain register api
+                parameters = {
+                    "type": "user", 
+                    "username" : username,
+                    "orgName" : "Transporter",
+                    "role": "client",
+                    "attrs":[
+                        {
+                            "name" : "isadmin",
+                            "value": "true",
+                            "ecert": True
+                        }
+                    ],
+                    "secret":"c5649bb423d7793ddd6941ffa55e14ce"
+                }
+                resp = requests.post('http://34.95.15.17:4000/users/register', json=parameters)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    status = data['success']
+                    if status:
+                        token = data['token']
+                        return {"status": "success", "token": token}, 201, {'Access-Control-Allow-Origin': '*'} 
         return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}  
 
 
@@ -121,6 +158,7 @@ def initialize():
     # Intialize the rest api server
     api.add_resource(Athentication, "/api/authenticate")
     api.add_resource(AthenticationTransport, "/api/authenticatetransport")
+    api.add_resource(AthenticationWarehouse, "/api/authenticatewarehouse")
     api.add_resource(Registration, "/api/register")
     app.run(debug=True)
 
