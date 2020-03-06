@@ -140,6 +140,44 @@ class AthenticationWarehouse(Resource):
                         return {"status": "success", "token": token}, 201, {'Access-Control-Allow-Origin': '*'} 
         return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}  
 
+class AthenticationSupplier(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("username")
+        parser.add_argument("password")
+        args = parser.parse_args()
+        username =  args['username']
+        password = args['password']
+        if username != None and password != None:
+            if username not in database['users']:
+                return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}
+            if database['users'][username]['password'] == password:
+                print("hello")
+                #Call the blockchain register api
+                parameters = {
+                    "type": "user", 
+                    "username" : username,
+                    "orgName" : "Supplier",
+                    "role": "client",
+                    "attrs":[
+                        {
+                            "name" : "isadmin",
+                            "value": "true",
+                            "ecert": True
+                        }
+                    ],
+                    "secret":"f678132d63622faac49c1b6ae0120612"
+                }
+                resp = requests.post('http://35.203.91.138:4000/users/register', json=parameters)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    status = data['success']
+                    if status:
+                        token = data['token']
+                        return {"status": "success", "token": token}, 201, {'Access-Control-Allow-Origin': '*'} 
+        return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}  
+
+
 
 class Registration(Resource):
     def post(self):
@@ -160,8 +198,9 @@ def initialize():
     api.add_resource(Athentication, "/api/authenticate")
     api.add_resource(AthenticationTransport, "/api/authenticatetransport")
     api.add_resource(AthenticationWarehouse, "/api/authenticatewarehouse")
+    api.add_resource(AthenticationSupplier, "/api/authenticatesupplier")
     api.add_resource(Registration, "/api/register")
-    app.run(host='0.0.0.0')
-    # app.run()
+    # app.run(host='0.0.0.0')
+    app.run()
 
 initialize()

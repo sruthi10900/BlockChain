@@ -84,6 +84,27 @@ var packingLabelList ;
             });
         };
 
+        $scope.logInSupplier = function () {
+            console.log("helloo");
+            $scope.dataLoading = true;
+            AuthenticationService.loginSupplier($scope.username, $scope.password, function (response) {
+                console.log(response)
+                if (response.data.status == "success") {
+                    $rootScope.isSupplier = true;
+                    $rootScope.isLoggedIn = true;
+                    $rootScope.token = response.data.token
+                    console.log($rootScope.token);
+                    // AuthenticationService.setCredentials($scope.username, $scope.password);
+                    
+                } else {
+                    $scope.error = response.message;
+                    alert("Invalid creds");
+                    $scope.dataLoading = false;
+                }
+            });
+        };
+
+
         $scope.fetchDetails = function(){
             AuthenticationService.fetchDetails($scope.packingLabelList,function(response){
                 
@@ -115,6 +136,26 @@ var packingLabelList ;
                     $rootScope.fetched = true;
                     $rootScope.recieved = false;
                     $scope.warehouseChecklist = response.data
+                }
+                if(response.message == "Already Processed"){
+                    $rootScope.processed = true;
+                }
+                if(response.message == "cannot Process at the moment"){
+                    $rootScope.recieved = true;
+                }
+            })
+        }
+
+        $scope.fetchDetailsSupplier = function(){
+            AuthenticationService.fetchDetailsSupplier($scope.packingLabelList,function(response){
+                
+                console.log(response);
+                if(response.success){
+                    console.log(response);
+                    $rootScope.processed=false;
+                    $rootScope.fetched = true;
+                    $rootScope.recieved = false;
+                    $scope.supplierChecklist = response.data
                 }
                 if(response.message == "Already Processed"){
                     $rootScope.processed = true;
@@ -162,6 +203,23 @@ var packingLabelList ;
             $scope.dataLoading = true;
             console.log("jekj");
             AuthenticationService.recievedWarehouse($scope.packingLabelList,function (response) {
+                if (response.success) {
+                    $rootScope.isSubmitted = true;
+                  
+                    console.log("data entered");
+                } else {
+                    $scope.error = response.message;
+                    alert(response.message);
+                    $scope.dataLoading = false;
+                }
+               
+            })
+        };
+
+        $scope.recievedSupplier = function () {
+            $scope.dataLoading = true;
+            console.log("jekj");
+            AuthenticationService.recievedSupplier($scope.packingLabelList,function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                   

@@ -34,6 +34,14 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
        
         }
 
+        service.loginSupplier = function(username, password, callback) {
+            var parms = {username, password}
+            $http.post("http://localhost:5000/api/authenticatesupplier", JSON.stringify(parms)).then(function(response){
+                callback(response);
+            });
+       
+        }
+
         service.fetchDetails = function(packingLabelList,callback){
             var success = false;
             var message = "Submit Failed";
@@ -52,7 +60,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         
                     message = "Already Processed";
                 }
-                else if(response.data.Status == "Submitted"){
+                else if(response.data.Status == "Recievd  to Supplier"){
         
                     message = "Submit succes";
                 }
@@ -87,6 +95,42 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                     message = "Already Processed";
                 }
                 else if(response.data.Status == "Recievd  to Transporter"){
+        
+                    message = "Submit succes";
+                }
+                else{
+                    message = "cannot Process at the moment"
+                }
+                callback({success: success, message: message, data:response.data});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+                
+                
+            });
+        }
+
+        service.fetchDetailsSupplier = function(packingLabelList,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+              var x = packingLabelList.toString();
+            $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
+                if(response.status == 200){
+                    console.log(response);
+                
+                success = true;
+                message = "Submit succes";
+                if(response.data.Status == "Recievd  to Supplier"){
+        
+                    message = "Already Processed";
+                }
+                else if(response.data.Status == "Submitted"){
         
                     message = "Submit succes";
                 }
@@ -216,6 +260,40 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
 
 
             $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+                // First function handles success
+                // $scope.content = response.data;
+                console.log(response);
+                if(response.data.success){
+                    console.log(response.data.success);
+                success = true;
+                message = "Submit succes";
+               
+                                callback({success: success, message: message});
+                }
+                else{
+                    callback({success: false, message: "Submit Failed"});
+                }
+              });
+        }
+
+        service.recievedSupplier = function(packingLabelList,callback){
+            var success = false;
+            var message = "Submit Failed";
+            var config = {
+                headers: {
+                  'Authorization': 'Bearer '+$rootScope.token
+                }
+              };
+            var parameter = JSON.stringify({
+                
+	
+                    "peer":["peer0.machine1.supplier.example.com"],
+                    "fcn":"updateAssetStatus",
+                    "args":[packingLabelList,"Recievd  to Supplier"]
+    });
+
+
+            $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);

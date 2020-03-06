@@ -1,0 +1,25 @@
+.my-main-container {
+    position: absolute;
+    left: 50px;
+    width: calc(100vw - 50px);
+    padding: 10px;
+}
+.my-side-nav {
+    position: absolute;
+    left: 0;
+    height: 100vh;
+    width: 50px;
+    background-color: blueviolet;
+    text-align: center;
+    padding-top: 10px;
+}
+div.my-side-nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.my-icon {
+    font-size: 25px;
+    color: white;
+    margin-bottom: 10px;
+}
