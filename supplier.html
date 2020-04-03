@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="loginpage.css">
 <link rel="stylesheet" href="mystyles.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehous.jpg'); background-repeat: no-repeat; background-attachment: fixed;
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehouse.jpg'); background-repeat: no-repeat; background-attachment: fixed;
 background-size: cover;" >
 
     <!-- Log in page -->
@@ -22,7 +22,7 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
                     <input type="button" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
@@ -68,7 +68,7 @@ background-size: cover;" >
         </div> -->
         <div ng-show="isSubmitted">
             <div class="my-main-container">
-                <h2 > Warehouse Submitted the order!!</h2>
+                Supplier Submitted the order!!
             </div>
         </div>
         <!-- <div ng-show="processed">
@@ -83,10 +83,10 @@ background-size: cover;" >
         </div> -->
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                <h2 style="color: white;"> Warehouse Logged In!!</h2>
+                <h2 style='color: black;'> Supplier Logged In!!</h2>
                  <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
                  placeholder="packingLabelList">
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsSupplier()">
                 
             </div>
         </div>
@@ -95,7 +95,6 @@ background-size: cover;" >
             <div class="my-main-container">
                  <h2 style="text-align: center;">Details Of the Order</h2>
 
-                
 
                  <table  style="width:100%; color: white;">
                     <tr>
@@ -121,8 +120,7 @@ background-size: cover;" >
                   </li>
                   </table>
                 
-                
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedSupplier()">
                 
             </div>
         </div>

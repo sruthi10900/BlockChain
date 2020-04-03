@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="transport.css">
 <link rel="stylesheet" href="transportstyle.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl">
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/transport.jpeg'); background-repeat: no-repeat; background-attachment: fixed;
+background-size: cover;" >
 
     <!-- Log in page -->
     <div ng-show="!isLoggedIn && !isRegister">
@@ -71,16 +72,16 @@
                 Transporter Submitted the order!!
             </div>
         </div>
-        <div ng-show="processed">
+        <!-- <div ng-show="processed">
             <div class="my-main-container">
                 Already Processed
             </div>
-        </div>
-        <div ng-show="recieved">
+        </div> -->
+        <!-- <div ng-show="recieved">
             <div class="my-main-container">
                 Cant be accessed at this moment
             </div>
-        </div>
+        </div> -->
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
                 <h2 style="color: black;"> Transporter Logged In!!</h2>
@@ -97,22 +98,28 @@
 
                 
 
-                 <table style="width:100%">
+                 <table  style="width:100%; color: white;">
                     <tr>
-                      <th>PackingList Id</th>
+                      <th>POID</th>
                       <th>ItemType</th>
                       <th>Qunatity</th>
+                      <th>Price</th>
                       <th>Check</th>
+                      
                       <th>Note</th>
                     </tr>
-                    <tr>
-                      <td> {{transportChecklist.Poid}}</td>
-                      <td> {{transportChecklist.ProductName}}</td>
-                      <td> {{transportChecklist.Qty}}</td>
-                      <td> <input type="checkbox" id={{transportChecklist.ProductName}} name={{transportChecklist.ProductName}} value={{transportChecklist.ProductName}}></td>
+               
+                    <tr ng-repeat="product in productList">
+                      
+                       <td> {{product.poid}}</td>
+                      <td> {{product.name}}</td>
+                      <td> {{product.qty}}</td>
+                      <td>{{product.price}}</td>
+                      <td> <input type="checkbox" class = "checkbox" ng-checked="selection.indexOf(product) > -1"
+                        ng-click="toggleSelection(product)" id={{product.name}} name={{product.name}} value={{product.name}}></td>
                       <td> Comments</td>
                     </tr>
-                  
+                  </li>
                   </table>
                 
                  <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedTransport()">

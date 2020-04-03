@@ -11,7 +11,7 @@ app.service('NgoService',['$http', '$cookies', '$rootScope', function($http, $co
                 });
 
 
-            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po2contract', parameter).then(function(response) {
+            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po3contract', parameter).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response.data);

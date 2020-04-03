@@ -6,10 +6,10 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link rel="stylesheet" href="loginpage.css">
-<link rel="stylesheet" href="mystyles.css">
+<link rel="stylesheet" href="transport.css">
+<link rel="stylesheet" href="transportstyle.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehous.jpg'); background-repeat: no-repeat; background-attachment: fixed;
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/transport.jpeg'); background-repeat: no-repeat; background-attachment: fixed;
 background-size: cover;" >
 
     <!-- Log in page -->
@@ -22,7 +22,7 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" class="fadeIn third" value="Log In" ng-click="logIn()">
                     <input type="button" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
@@ -68,66 +68,33 @@ background-size: cover;" >
         </div> -->
         <div ng-show="isSubmitted">
             <div class="my-main-container">
-                <h2 > Warehouse Submitted the order!!</h2>
+                
+                USAID initiated the order!!
             </div>
         </div>
         <!-- <div ng-show="processed">
             <div class="my-main-container">
                 Already Processed
             </div>
-        </div>
-        <div ng-show="recieved">
+        </div> -->
+        <!-- <div ng-show="recieved">
             <div class="my-main-container">
                 Cant be accessed at this moment
             </div>
         </div> -->
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                <h2 style="color: white;"> Warehouse Logged In!!</h2>
-                 <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
-                 placeholder="packingLabelList">
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                <h2 style="color: black;"> USAID Logged In!!</h2>
+                <input type="text" id="name" class="fadeIn second" name="name" ng-model="name"
+                 placeholder="name">
+                 <input type="text" id="payAmount" class="fadeIn second" name="payAmount" ng-model="payAmount"
+                 placeholder="payAmount">
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="submitOrder()">
                 
             </div>
         </div>
 
-        <div ng-show="!isSubmitted && fetched && !processed && !recieved">
-            <div class="my-main-container">
-                 <h2 style="text-align: center;">Details Of the Order</h2>
-
-                
-
-                 <table  style="width:100%; color: white;">
-                    <tr>
-                      <th>POID</th>
-                      <th>ItemType</th>
-                      <th>Qunatity</th>
-                      <th>Price</th>
-                      <th>Check</th>
-                      
-                      <th>Note</th>
-                    </tr>
-               
-                    <tr ng-repeat="product in productList">
-                      
-                       <td> {{product.poid}}</td>
-                      <td> {{product.name}}</td>
-                      <td> {{product.qty}}</td>
-                      <td>{{product.price}}</td>
-                      <td> <input type="checkbox" class = "checkbox" ng-checked="selection.indexOf(product) > -1"
-                        ng-click="toggleSelection(product)" id={{product.name}} name={{product.name}} value={{product.name}}></td>
-                      <td> Comments</td>
-                    </tr>
-                  </li>
-                  </table>
-                
-                
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
-                
-            </div>
-        </div>
-
-    </div>
+        
 
     <!-- END: Main page -->
 

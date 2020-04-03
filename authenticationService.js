@@ -20,7 +20,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
 
           
            
-            // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
+            // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
             //     callback(response);
             // });
 
@@ -51,12 +51,12 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 }
               };
               var x = packingLabelList.toString();
-            $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 success = true;
                 message = "Submit succes";
-                if(response.data.Status == "Recievd  to Transporter"){
+                if(response.data.Status == "Recievd  to Transporter" ){
         
                     message = "Already Processed";
                 }
@@ -84,7 +84,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 }
               };
               var x = packingLabelList.toString();
-            $http.get("http://35.203.75.224:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.warehouse.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.warehouse.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 
@@ -120,7 +120,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 }
               };
               var x = packingLabelList.toString();
-            $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po2contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 
@@ -191,7 +191,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 });
 
 
-            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -208,7 +208,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         }
 
 
-        service.recievedTransport = function(packingLabelList,callback){
+        service.recievedTransport = function(packingLabelList,sel,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -216,6 +216,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
+              if(sel){
             var parameter = JSON.stringify({
                 
 	
@@ -223,9 +224,19 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                     "fcn":"updateAssetStatus",
                     "args":[packingLabelList,"Recievd  to Transporter"]
     });
+}
+else{
+    var parameter = JSON.stringify({
+                
+	
+        "peer":["peer0.machine1.transporter.example.com"],
+        "fcn":"updateAssetStatus",
+        "args":[packingLabelList,"Recievd  to Transporter with Items Missing"]
+});
+}
 
 
-            $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+            $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -242,7 +253,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         }
 
 
-        service.recievedWarehouse = function(packingLabelList,callback){
+        service.recievedWarehouse = function(packingLabelList,sel,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -250,6 +261,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
+              if(sel){
             var parameter = JSON.stringify({
                 
 	
@@ -257,9 +269,19 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                     "fcn":"updateAssetStatus",
                     "args":[packingLabelList,"Recievd  to Warehouse"]
     });
+              }
+              else{
+      
+                    var parameter = JSON.stringify({
+                        
+            
+                            "peer":["peer0.machine1.warehouse.example.com"],
+                            "fcn":"updateAssetStatus",
+                            "args":[packingLabelList,"Recievd  to Warehouse with Items Missing"]
+            });
+        }
 
-
-            $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+            $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -276,7 +298,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
               });
         }
 
-        service.recievedSupplier = function(packingLabelList,callback){
+        service.recievedSupplier = function(packingLabelList,sel,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -284,6 +306,8 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
+
+              if(sel){
             var parameter = JSON.stringify({
                 
 	
@@ -291,9 +315,19 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                     "fcn":"updateAssetStatus",
                     "args":[packingLabelList,"Recievd  to Supplier"]
     });
+}
+else{
+    var parameter = JSON.stringify({
+                
+	
+        "peer":["peer0.machine1.supplier.example.com"],
+        "fcn":"updateAssetStatus",
+        "args":[packingLabelList,"Recievd  to Supplier with Items Missing"]
+});
+}
 
 
-            $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po2contract', parameter,config).then(function(response) {
+            $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);

@@ -2,17 +2,14 @@
 <html lang="en-US">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-cookies.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link rel="stylesheet" href="loginpage.css">
-<link rel="stylesheet" href="mystyles.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehous.jpg'); background-repeat: no-repeat; background-attachment: fixed;
-background-size: cover;" >
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="transport.css">
+<link rel="stylesheet" href="transportstyle.css">
 
-    <!-- Log in page -->
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" >
+   
+   
     <div ng-show="!isLoggedIn && !isRegister">
         <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
             <div id="formContent">
@@ -22,7 +19,7 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
                     <input type="button" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
@@ -51,87 +48,76 @@ background-size: cover;" >
         </div>
     </div>
 
-
-
-
-
-    <!-- END: Log in page -->
-    <!-- Main page -->
     <div ng-show="isLoggedIn">
-        <div class="my-side-nav">
-            <!-- <span class="my-icon"><i class=" fas fa-user"></i></span><br/> -->
+        <!-- <div class="my-side-nav">
+            <span class="my-icon"><i class=" fas fa-user"></i></span><br/>
             <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
                         class=" fas fa-power-off"></i></a></span>
-        </div>
+        </div> -->
         <!-- <div class="my-main-container">
              Logged In
         </div> -->
-        <div ng-show="isSubmitted">
-            <div class="my-main-container">
-                <h2 > Warehouse Submitted the order!!</h2>
-            </div>
-        </div>
-        <!-- <div ng-show="processed">
-            <div class="my-main-container">
-                Already Processed
-            </div>
-        </div>
-        <div ng-show="recieved">
-            <div class="my-main-container">
-                Cant be accessed at this moment
-            </div>
-        </div> -->
+        
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                <h2 style="color: white;"> Warehouse Logged In!!</h2>
+
+                <br>
+                <br>
                  <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
-                 placeholder="packingLabelList">
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                 placeholder="project ID">
+                 <br>
+                 <br>
+                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsNGO()">
                 
             </div>
         </div>
 
-        <div ng-show="!isSubmitted && fetched && !processed && !recieved">
-            <div class="my-main-container">
-                 <h2 style="text-align: center;">Details Of the Order</h2>
+       
+      <div ng-show ="fetched">
+        <div class="my-main-container">
+            <h2>
+                Track your Order
+            </h2>
+            <br>
 
-                
+            <h2>Project Id : {{packingLabelList}}</h2>
 
-                 <table  style="width:100%; color: white;">
-                    <tr>
-                      <th>POID</th>
-                      <th>ItemType</th>
-                      <th>Qunatity</th>
-                      <th>Price</th>
-                      <th>Check</th>
-                      
-                      <th>Note</th>
-                    </tr>
-               
-                    <tr ng-repeat="product in productList">
-                      
-                       <td> {{product.poid}}</td>
-                      <td> {{product.name}}</td>
-                      <td> {{product.qty}}</td>
-                      <td>{{product.price}}</td>
-                      <td> <input type="checkbox" class = "checkbox" ng-checked="selection.indexOf(product) > -1"
-                        ng-click="toggleSelection(product)" id={{product.name}} name={{product.name}} value={{product.name}}></td>
-                      <td> Comments</td>
-                    </tr>
-                  </li>
-                  </table>
-                
-                
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
-                
-            </div>
+            <br>
+            <br>
+            <br>
+        <ol class="progress" data-steps="6">
+            <li id="USAID">
+                <span class="name">USAID</span>
+                <span class="step"><span>1</span></span>
+            </li>
+            <li id="NGO">
+                <span class="name">NGO</span>
+                <span class="step"><span>2</span></span>
+            </li>
+            <li id= "Supplier">
+                <span class="name">Supplier</span>
+                <span class="step"><span>3</span></span>
+            </li>
+            <li id="Transporter">
+                <span class="name">Transporter</span>
+                <span class="step"><span>4</span></span>
+            </li>
+            <li id="Warehouse">
+                <span class="name">Warehouse</span>
+                <span class="step"><span>5</span></span>
+            </li>
+           
+            <li id= "User">
+                <span class="name">User</span>
+                <span class="step"><span>6</span></span>
+            </li>
+            
+        </ol>
         </div>
+    </div> 
 
     </div>
-
-    <!-- END: Main page -->
-
-    <!-- Angular js -->
+    
     <script src="dashboardApp.js"></script>
     <script src="authenticationService.js"></script>
     <script src="dashboardController.js"></script>
@@ -146,6 +132,21 @@ background-size: cover;" >
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
         </script>
-</body>
 
-</html>
+        <script>
+                    function myFunction() {
+            console.log("gie");
+            document.getElementsByClassName("active")[0].className = "done";
+            document.getElementsByClassName("notStarted")[0].className = "active";
+        }
+
+        function myFunctionTimer() {
+            myVar = setInterval(alertFunc, 3000);
+          }
+          
+          function alertFunc() {
+            alert("Hello!");
+          }
+        </script>
+    </body>
+    </html> 
