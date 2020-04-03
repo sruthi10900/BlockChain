@@ -175,7 +175,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
         //     // $http.defaults.headers.common.Authorization = 'Basic ';
         // };
 
-        service.addProduct = function(packingLabelList,shipTo,shipVia,itemType,quantity,callback){
+        service.addProduct = function(packingLabelList,shipTo,shipVia,itemType,quantity,price,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -183,14 +183,33 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
+              function toArray(obj) {
+                var result = [];
+                for (var prop in obj) {
+                  var value = obj[prop];
+                  console.log(prop);
+                  if (typeof value === 'object') {
+                    result.push(toArray(value));
+              
+                    console.log(result);
+                  } else {
+                    result.push(value);
+                    console.log(result);
+                  }
+                }
+                return result;
+              }
+              var product = [];
+              product.push({"poid":packingLabelList,"name":itemType,"qty":quantity, "price":price});
+             
             var parameter = JSON.stringify({
                 "peers":["peer0.machine1.ngo.example.com"],
                 "fcn":"insertAsset",
                 "args":[packingLabelList,"Digital Vibes","12/02/2020",shipTo,"NGOTo",shipVia,"MTransports","Null","1 day","13/02/2020",
-                "1",itemType,quantity,"15","17","15","2","Null","Null","None","Submitted"]
+                "1",JSON.stringify((product)),quantity,"15","17","15","2","Null","Null","None","Submitted"]
                 });
 
-
+debugger;
             $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;

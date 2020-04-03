@@ -300,7 +300,7 @@ app.controller('dashboardCtrl',
 
         $scope.addProduct = function () {
             $scope.dataLoading = true;
-            AuthenticationService.addProduct($scope.packingLabelList, $scope.shipTo, $scope.shipVia, $scope.itemType, $scope.qty, function (response) {
+            AuthenticationService.addProduct($scope.packingLabelList, $scope.shipTo, $scope.shipVia, $scope.itemType, $scope.qty,$scope.price, function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                     console.log("data entered");
