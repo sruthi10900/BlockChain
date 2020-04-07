@@ -20,6 +20,13 @@ div.my-side-nav a {
 
 .my-icon {
     font-size: 25px;
-    color: white;
+    color: black;
     margin-bottom: 10px;
+}
+.block2 {
+    color: blue;
+    width: 100px;
+    position: absolute;
+    top: 0px;
+    right: 10px;
 }

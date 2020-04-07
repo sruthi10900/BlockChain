@@ -3,13 +3,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-cookies.min.js"></script>
 
+
+
 <link rel="stylesheet" href="dashboard.css">
 <link rel="stylesheet" href="transport.css">
 <link rel="stylesheet" href="transportstyle.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" >
-   
-   
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl">
+<div class=block2>
+    <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+</div>
+
     <div ng-show="!isLoggedIn && !isRegister">
         <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
             <div id="formContent">
@@ -19,8 +23,8 @@
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
-                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -33,15 +37,15 @@
                 <h2>BlockChain</h2>
                 <div>
                     <input type="text" id="fname" class="fadeIn first" name="fname" ng-model="fname"
-                    placeholder="FirstName">
-                <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
-                    placeholder="LastName">
+                        placeholder="FirstName">
+                    <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
+                        placeholder="LastName">
                     <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    
-                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -57,67 +61,95 @@
         <!-- <div class="my-main-container">
              Logged In
         </div> -->
-        
+
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
 
                 <br>
                 <br>
-                 <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
-                 placeholder="project ID">
-                 <br>
-                 <br>
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsNGO()">
-                
+                <input type="text" id="packingLabelList" width=50%  class="fadeIn second" name="packingLabelList"
+                    ng-model="packingLabelList" placeholder="project ID">
+                <br>
+                <br>
+                <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsNGO()">
+
             </div>
         </div>
 
-       
-      <div ng-show ="fetched">
-        <div class="my-main-container">
-            <h2>
-                Track your Order
-            </h2>
-            <br>
 
-            <h2>Project Id : {{packingLabelList}}</h2>
+        <div ng-show="fetched">
+            <div class="my-main-container">
+                <div >
+                    <h2 style="color: black;">
+                        Track your Order
+                    </h2>
+                    <br>
 
-            <br>
-            <br>
-            <br>
-        <ol class="progress" data-steps="6">
-            <li id="USAID">
-                <span class="name">USAID</span>
-                <span class="step"><span>1</span></span>
-            </li>
-            <li id="NGO">
-                <span class="name">NGO</span>
-                <span class="step"><span>2</span></span>
-            </li>
-            <li id= "Supplier">
-                <span class="name">Supplier</span>
-                <span class="step"><span>3</span></span>
-            </li>
-            <li id="Transporter">
-                <span class="name">Transporter</span>
-                <span class="step"><span>4</span></span>
-            </li>
-            <li id="Warehouse">
-                <span class="name">Warehouse</span>
-                <span class="step"><span>5</span></span>
-            </li>
-           
-            <li id= "User">
-                <span class="name">User</span>
-                <span class="step"><span>6</span></span>
-            </li>
-            
-        </ol>
+
+                    <br>
+                    <br>
+                    <br>
+                    <ol class="progress" data-steps="6">
+                        <li id="USAID">
+                            <span class="name">USAID</span>
+                            <span class="step"><span>1</span></span>
+
+                        </li>
+
+                        <li id="NGO">
+                            <span class="name">NGO</span>
+                            <span class="step"><span>2</span></span>
+                        </li>
+                        <li id="Supplier">
+                            <span class="name">Supplier</span>
+                            <span class="step"><span>3</span></span>
+                        </li>
+                        <li id="Transporter">
+                            <span class="name">Transporter</span>
+                            <span class="step"><span>4</span></span>
+                        </li>
+                        <li id="Warehouse">
+                            <span class="name">Warehouse</span>
+                            <span class="step"><span>5</span></span>
+                        </li>
+                        <li id="User">
+                            <span class="name">User</span>
+                            <span class="step"><span>6</span></span>
+                        </li>
+                    </ol>
+                </div>
+                <div>
+<br>
+<br>
+<br>
+                    <ol class="progress" data-steps="6">
+                        <li id = "USAIDdata">
+                          
+                        </li>
+                        <li id = "NGOdata">
+                            
+                        </li>
+                        <li id = "Supplierdata">
+                            
+                        </li>
+                        <li  id = "Transportdata">
+                          
+                        </li>
+                        <li  id = "Warehousedata">
+                            
+                        </li>
+                        <li  id = "Userdata">
+                         
+                        </li>
+                    </ol>
+
+
+                </div>
+            </div>
         </div>
-    </div> 
 
     </div>
-    
+
     <script src="dashboardApp.js"></script>
     <script src="authenticationService.js"></script>
     <script src="dashboardController.js"></script>
@@ -133,8 +165,8 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
         </script>
 
-        <script>
-                    function myFunction() {
+    <script>
+        function myFunction() {
             console.log("gie");
             document.getElementsByClassName("active")[0].className = "done";
             document.getElementsByClassName("notStarted")[0].className = "active";
@@ -142,11 +174,12 @@
 
         function myFunctionTimer() {
             myVar = setInterval(alertFunc, 3000);
-          }
-          
-          function alertFunc() {
+        }
+
+        function alertFunc() {
             alert("Hello!");
-          }
-        </script>
-    </body>
-    </html> 
+        }
+    </script>
+</body>
+
+</html>

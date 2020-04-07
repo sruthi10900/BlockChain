@@ -9,9 +9,11 @@
 <link rel="stylesheet" href="transport.css">
 <link rel="stylesheet" href="transportstyle.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/transport.jpeg'); background-repeat: no-repeat; background-attachment: fixed;
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/usaidd.png'); background-repeat: no-repeat; background-attachment: fixed;
 background-size: cover;" >
-
+<div class=block2>
+    <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+</div>
     <!-- Log in page -->
     <div ng-show="!isLoggedIn && !isRegister">
         <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
@@ -22,8 +24,8 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logIn()">
-                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logIn()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -44,7 +46,7 @@ background-size: cover;" >
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
                     
-                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -69,7 +71,7 @@ background-size: cover;" >
         <div ng-show="isSubmitted">
             <div class="my-main-container">
                 
-                USAID initiated the order!!
+                Donor initiated the order!!
             </div>
         </div>
         <!-- <div ng-show="processed">
@@ -84,12 +86,13 @@ background-size: cover;" >
         </div> -->
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                <h2 style="color: black;"> USAID Logged In!!</h2>
+                <h2 style="color: black;"> Donor Logged In!!</h2>
+                <br>
                 <input type="text" id="name" class="fadeIn second" name="name" ng-model="name"
-                 placeholder="name">
+                 placeholder="name" style="width: 20%;">
                  <input type="text" id="payAmount" class="fadeIn second" name="payAmount" ng-model="payAmount"
-                 placeholder="payAmount">
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="submitOrder()">
+                 placeholder="payAmount" style="width: 20%;">
+                 <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="submitOrder()">
                 
             </div>
         </div>

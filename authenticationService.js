@@ -56,11 +56,11 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                     console.log(response);
                 success = true;
                 message = "Submit succes";
-                if(response.data.Status == "Recievd  to Transporter" ){
+                if(response.data.Status.includes("Recievd to Transporter") ){
         
                     message = "Already Processed";
                 }
-                else if(response.data.Status == "Recievd  to Supplier"){
+                else if(response.data.Status.includes("Recievd to Supplier")){
         
                     message = "Submit succes";
                 }
@@ -90,11 +90,11 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 
                 success = true;
                 message = "Submit succes";
-                if(response.data.Status == "Recievd  to Warehouse"){
+                if(response.data.Status.includes("Recievd to Warehouse")){
         
                     message = "Already Processed";
                 }
-                else if(response.data.Status == "Recievd  to Transporter"){
+                else if(response.data.Status.includes("Recievd to Transporter")){
         
                     message = "Submit succes";
                 }
@@ -123,14 +123,18 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
             $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
-                
+
                 success = true;
                 message = "Submit succes";
-                if(response.data.Status == "Recievd  to Supplier"){
+               if(!response.data.Comments&&response.data.includes("Error")){
+                message = "cannot Process at the moment";
+                // callback({success: success, message: message, data:response.data});
+               }
+               else if(response.data.Status.includes("Recievd to Supplier")){
         
                     message = "Already Processed";
                 }
-                else if(response.data.Status == "Submitted"){
+                else if(response.data.Status.includes("Submitted")){
         
                     message = "Submit succes";
                 }
@@ -208,8 +212,6 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 "args":[packingLabelList,"Digital Vibes","12/02/2020",shipTo,"NGOTo",shipVia,"MTransports","Null","1 day","13/02/2020",
                 "1",JSON.stringify((product)),quantity,"15","17","15","2","Null","Null","None","Submitted"]
                 });
-
-debugger;
             $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
@@ -227,7 +229,7 @@ debugger;
         }
 
 
-        service.recievedTransport = function(packingLabelList,sel,callback){
+        service.recievedTransport = function(packingLabelList,sel,comments,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -241,7 +243,7 @@ debugger;
 	
                     "peer":["peer0.machine1.transporter.example.com"],
                     "fcn":"updateAssetStatus",
-                    "args":[packingLabelList,"Recievd  to Transporter"]
+                    "args":[packingLabelList,"Recievd to Transporter"+new Date().getTime()]
     });
 }
 else{
@@ -250,7 +252,14 @@ else{
 	
         "peer":["peer0.machine1.transporter.example.com"],
         "fcn":"updateAssetStatus",
-        "args":[packingLabelList,"Recievd  to Transporter with Items Missing"]
+        "args":[packingLabelList,"Recievd  to Transporter with Items Missing"+new Date().getTime()]
+});
+var parameter1 = JSON.stringify({
+                
+	
+    "peer":["peer0.machine1.transporter.example.com"],
+    "fcn":"updateAssetComments",
+    "args":[packingLabelList,"Transporter "+comments]
 });
 }
 
@@ -263,16 +272,24 @@ else{
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
+                if(!sel){ $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+                    // First function handles success
+                    // $scope.content = response.data;
+                    console.log(response);
+                  });
+                }
                 callback({success: success, message: message});
                 }
                 else{
                     callback({success: false, message: "Submit Failed"});
                 }
               });
+
+           
         }
 
 
-        service.recievedWarehouse = function(packingLabelList,sel,callback){
+        service.recievedWarehouse = function(packingLabelList,sel,comments,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -286,7 +303,7 @@ else{
 	
                     "peer":["peer0.machine1.warehouse.example.com"],
                     "fcn":"updateAssetStatus",
-                    "args":[packingLabelList,"Recievd  to Warehouse"]
+                    "args":[packingLabelList,"Recievd to Warehouse"+new Date().getTime()]
     });
               }
               else{
@@ -296,28 +313,43 @@ else{
             
                             "peer":["peer0.machine1.warehouse.example.com"],
                             "fcn":"updateAssetStatus",
-                            "args":[packingLabelList,"Recievd  to Warehouse with Items Missing"]
+                            "args":[packingLabelList,"Recievd  to Warehouse with Items Missing"+new Date().getTime()]
             });
+
+
+            var parameter1 = JSON.stringify({
+                        
+            
+                "peer":["peer0.machine1.warehouse.example.com"],
+                "fcn":"updateAssetComments",
+                "args":[packingLabelList,"Warehouse " +comments]
+});
+
         }
 
             $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
+        
                 console.log(response);
                 if(response.data.success){
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
-               
+                if(!sel){  $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+                    console.log(response);
+                  });
+                }
                                 callback({success: success, message: message});
                 }
                 else{
                     callback({success: false, message: "Submit Failed"});
                 }
               });
+            
         }
 
-        service.recievedSupplier = function(packingLabelList,sel,callback){
+        service.recievedSupplier = function(packingLabelList,sel,comments,callback){
             var success = false;
             var message = "Submit Failed";
             var config = {
@@ -332,7 +364,7 @@ else{
 	
                     "peer":["peer0.machine1.supplier.example.com"],
                     "fcn":"updateAssetStatus",
-                    "args":[packingLabelList,"Recievd  to Supplier"]
+                    "args":[packingLabelList,"Recievd to Supplier"+new Date().getTime()]
     });
 }
 else{
@@ -341,7 +373,14 @@ else{
 	
         "peer":["peer0.machine1.supplier.example.com"],
         "fcn":"updateAssetStatus",
-        "args":[packingLabelList,"Recievd  to Supplier with Items Missing"]
+        "args":[packingLabelList,"Recievd  to Supplier with Items Missing"+new Date().getTime()]
+});
+var parameter1 = JSON.stringify({
+                
+	
+    "peer":["peer0.machine1.supplier.example.com"],
+    "fcn":"updateAssetComments",
+    "args":[packingLabelList,"Supplier "+comments]
 });
 }
 
@@ -354,13 +393,20 @@ else{
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
-               
+               if(!sel){ $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+                    // First function handles success
+                    // $scope.content = response.data;
+                    console.log(response);
+                  });
+                }
                                 callback({success: success, message: message});
                 }
                 else{
                     callback({success: false, message: "Submit Failed"});
                 }
               });
+
+            
         }
 
     return service;

@@ -8,8 +8,17 @@
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link rel="stylesheet" href="loginpage.css">
 <link rel="stylesheet" href="mystyles.css">
+<link rel="stylesheet" href="transportstyle.css">
 
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl">
+<!-- <body ng-app="dashboardApp" ng-controller="dashboardCtrl" > -->
+
+
+    <body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/ngo.png'); background-repeat: no-repeat; background-attachment: fixed;
+background-size: cover;" > 
+
+    <div class=block2>
+        <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+    </div>
 
     <!-- Log in page -->
     <div ng-show="!isLoggedIn && !isRegister">
@@ -21,8 +30,8 @@
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logIn()">
-                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logIn()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -35,15 +44,15 @@
                 <h2>BlockChain</h2>
                 <div>
                     <input type="text" id="fname" class="fadeIn first" name="fname" ng-model="fname"
-                    placeholder="FirstName">
-                <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
-                    placeholder="LastName">
+                        placeholder="FirstName">
+                    <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
+                        placeholder="LastName">
                     <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    
-                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -66,31 +75,42 @@
         </div> -->
         <div ng-show="isSubmitted">
             <div class="my-main-container">
-                 Submitted
+                Submitted
             </div>
         </div>
         <div ng-show="!isSubmitted">
             <div class="my-main-container">
-                <input type="text" id="FirstName" class="fadeIn first" name="username" ng-model="username"
-                    placeholder="Username" disabled=true>
-                <br>
-                PackingLabelList<input type="text" id="username" class="fadeIn first" name="packingLabelList" ng-model="packingLabelList" placeholder="POID"
-                    size="20"><br>
-                Ship To<input type="text" id="shipTo" class="fadeIn first" name="shipTo" ng-model="shipTo"
-                    placeholder="Ship To" size="20"><br>
-                Ship Via<input type="text" id="shipVia" class="fadeIn first" name="shipVia" ng-model="shipVia"
-                    placeholder="Ship Via" size="20"><br>
-                <div id="dynamicInput">
-                    Item Type<input type="text" id="itemType" class="fadeIn first" name="itemType" ng-model="itemType"
-                        placeholder="Item Type" size="20"><br>
-                    Qty<input type="text" id="qty" class="fadeIn first" name="qty" ng-model="qty" placeholder="Quantity"
-                        size="3"><br>
-                        Price<input type="text" id="price" class="fadeIn first" name="price" ng-model="price" placeholder="Price"
-                        size="5">
-                </div>
-                <input type="button" class="fadeIn third" value="Submit" ng-click="addProduct()">
+                <div style="height: 80vh; width: 404px; margin:auto;">
 
-                
+                <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                    <div class="card-body" style = "width: 93%;
+                    height: 82%;
+                    position: absolute;
+                    overflow: hidden;
+                    top: 65px;
+                    background-color: white;
+                    left: 15px;
+                    padding: 0px 10px;
+                    top: 10 px;
+                    ">
+                    PackingLabelList<br><input type="text" id="username" class="fadeIn first" name="packingLabelList"
+                        ng-model="packingLabelList" placeholder="packingLabelList" size="20" width ="30%"><br>
+                    Ship To<br><input type="text" id="shipTo" class="fadeIn first" name="shipTo" ng-model="shipTo"
+                        placeholder="Ship To" size="20" width ="30%" ng-init="shipTo='Asia'"><br>
+                    Ship Via<br><input type="text" id="shipVia" class="fadeIn first" name="shipVia" ng-model="shipVia"
+                        placeholder="Ship Via" size="20" width ="30%" ng-init="shipVia='Africa'"><br>
+                    <div id="dynamicInput">
+                        Item Type<br><input type="text" id="itemType" class="fadeIn first" name="itemType"
+                            ng-model="itemType" placeholder="Item Type" size="20" width ="30%" ng-init="itemType='Medicine'"><br>
+                        Quantity<br><input type="text" id="qty" class="fadeIn first" name="qty" ng-model="qty"
+                            placeholder="Quantity" size="3" width ="30%"><br>
+                        Price <br> <input type="text" id="price" class="fadeIn first" name="price" ng-model="price"
+                            placeholder="Price" size="5" width ="30%">
+                    </div>
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="addProduct()">
+                </div>
+            </div>
+            </div>
             </div>
         </div>
 

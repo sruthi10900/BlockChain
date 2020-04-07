@@ -2,7 +2,7 @@
 /* BASIC */
 
 html {
-    background-color: lightcoral;
+    background-color: white;
   }
   
   body {
@@ -83,9 +83,9 @@ html {
   /* FORM TYPOGRAPHY*/
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: lightcoral;
+    background-color: white;
     border: none;
-    color: white;
+    color: black;
     padding: 15px 80px;
     text-align: center;
     text-decoration: none;
@@ -237,7 +237,7 @@ html {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: lightcoral;
+    background-color: white;
     content: "";
     transition: width 0.2s;
   }

@@ -83,18 +83,18 @@ ol.progress[data-steps="9"] li { width: 11%; }
     display: none;
 }
 
-.progress .done .step,
-.progress .done .step:before,
-.progress .done .step:after,
-.progress .active .step,
-.progress .active .step:before {
+.done .step,
+.done .step:before,
+.done .step:after,
+.active .step,
+ .active .step:before {
     background-color: yellowgreen;
 }
 
 
 
-.progress .done .step,
-.progress .active .step {
+.done .step,
+ .active .step {
     border: 3px solid yellowgreen;
 }
 
@@ -111,3 +111,41 @@ ol.progress[data-steps="9"] li { width: 11%; }
     border: 3px solid red;
   
 }
+
+
+/* #USAID .done .step:after{
+    background-color: yellowgreen;
+    border: 3px solid yellowgreen;
+    }
+#USAID .step:after{
+    content: "";
+    display: block;
+    background-color: silver;
+    height: 0.4em;
+    width: 77%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -44px;
+    z-index: -1;
+    transform: rotate(45deg);
+    transform-origin: 0% 0%;
+}
+ #NGO.active .step:before{
+    border: 3px solid yellowgreen;
+    background-color: yellowgreen;
+    }
+
+  #NGO.step:before{
+    content: "";
+    display: block;
+    background-color: silver;
+    height: 0.4em;
+    width: 53%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 75px; 
+    left: 0;
+    z-index: -1;
+    transform: rotate(13deg);
+    transform-origin: 0% 0%;
+} */

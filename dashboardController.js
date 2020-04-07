@@ -1,6 +1,7 @@
 'use strict';
+
 app.controller('dashboardCtrl',
-    function ($scope, $rootScope, $timeout, AuthenticationService) {
+    function ($scope, $rootScope, $timeout,$interval, AuthenticationService) {
         $rootScope.isLoggedIn = false;
         var packingLabelList;
         $scope.logIn = function () {
@@ -24,9 +25,6 @@ app.controller('dashboardCtrl',
             $rootScope.isRegister = true;
 
         }
-
-
-
 
         $scope.submit = function () {
             $rootScope.isRegister = true;
@@ -131,7 +129,7 @@ app.controller('dashboardCtrl',
                     $rootScope.fetched = true;
                     $rootScope.processed = false;
                     $scope.transportChecklist = response.data;
-                    $scope.productList = JSON.parse(response.data.ProductName);
+                    $scope.transportProductList = JSON.parse(response.data.ProductName);
                     $rootScope.recieved = false;
                 }
                
@@ -162,7 +160,7 @@ app.controller('dashboardCtrl',
                     $rootScope.fetched = true;
                     $rootScope.recieved = false;
                     $scope.warehouseChecklist = response.data;
-                    $scope.productList = JSON.parse(response.data.ProductName);
+                    $scope.warehouseProductList = JSON.parse(response.data.ProductName);
                 }
                 
             })
@@ -191,7 +189,7 @@ app.controller('dashboardCtrl',
                     $rootScope.fetched = true;
                     $rootScope.recieved = false;
                     $scope.supplierChecklist = response.data
-                    $scope.productList = JSON.parse(response.data.ProductName);
+                    $scope.supplierProductList = JSON.parse(response.data.ProductName);
 
                 }
                 
@@ -202,7 +200,10 @@ app.controller('dashboardCtrl',
 
             fetchNGO();
         };
-
+        var time=null;
+        var transporttime = null;
+        var suppliertime = null;
+        var warehousetime = null;
         function fetchNGO() {
             $scope.selection = [];
             AuthenticationService.fetchDetailsSupplier($scope.packingLabelList, function (response) {
@@ -219,83 +220,103 @@ app.controller('dashboardCtrl',
                 $timeout(function() {callAtTimeout(response)}, 5000);
 
             });
+           
             function callAtTimeout(response) {
-
-                if (response.message == "cannot Process at the moment") {
+                if (!response.data.Comments&& response.data.includes("Error")) {
                
 
                     document.getElementById("USAID").className = "active";
                   
-
+                    document.getElementById("USAIDdata").innerHTML = new Date().toString()+"<br />" +"Amount : $10000 <br/> ActionBy : test";
                 }
 
-                if (response.data.Status == "Submitted") {
-
+                else if (response.message =="Submit succes" && response.data.Status.includes("Submitted")) {
+                    if(time==null){
+                        time = new Date().getTime();
+                    }
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "active";
                   
-
+                    document.getElementById("NGOdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date((time)).toString()+" <br/> ActionBy : test";
                 }
-                else if (response.data.Status == "Recievd  to Supplier") {
-                    $rootScope.processed = true;
-                    document.getElementById("USAID").className = "done";
-                    document.getElementById("NGO").className = "done";
-                    document.getElementById("Supplier").className = "active";
-
-
-                }
-
-                else if (response.data.Status == "Recievd  to Transporter") {
-                    $rootScope.processed = true;
-                    document.getElementById("USAID").className = "done";
-                    document.getElementById("NGO").className = "done";
-                    document.getElementById("Supplier").className = "done";
-                    document.getElementById("Transporter").className = "active";
-                }
-                else if (response.data.Status == "Recievd  to Warehouse") {
-                    $rootScope.processed = true;
-                    document.getElementById("USAID").className = "done";
-                    document.getElementById("NGO").className = "done";
-                    document.getElementById("Supplier").className = "done";
-                    document.getElementById("Transporter").className = "done";
-                    document.getElementById("Warehouse").className = "active";
-                }
-
-                else if (response.data.Status == "Recievd  to Supplier with Items Missing") {
+                else if (response.data.Status.includes("Recievd  to Supplier with Items Missing")) {
+                    if(suppliertime==null){
+                        suppliertime = new Date().getTime();
+                    }
                     $rootScope.processed = true;
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "error";
+                    document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +' Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(suppliertime).toString()+" <br/> ActionBy : test";
                 }
 
-                else if (response.data.Status == "Recievd  to Transporter with Items Missing") {
+                else if (response.data.Status.includes("Recievd  to Transporter with Items Missing")) {
                     $rootScope.processed = true;
+                    if(transporttime==null){
+                        transporttime = new Date().getTime();
+                    }
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "error";
+                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(transporttime).toString()+" <br/> ActionBy : test";
                 }
 
-                else if (response.data.Status == "Recievd  to Warehouse with Items Missing") {
+                else if (response.data.Status.includes("Recievd  to Warehouse with Items Missing")) {
                     $rootScope.processed = true;
+                    if(warehousetime==null){
+                        warehousetime = new Date().getTime();
+                    }
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "done";
                     document.getElementById("Warehouse").className = "error";
+                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br /><br/>" +'Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(warehousetime).toString()+" <br/> ActionBy : test";
                 }
+                else if (response.data.Status.includes("Recievd to Supplier")) {
+                    if(suppliertime==null){
+                        suppliertime = new Date().getTime();
+                    }
+                    $rootScope.processed = true;
+                    document.getElementById("USAID").className = "done";
+                    document.getElementById("NGO").className = "done";
+                    document.getElementById("Supplier").className = "active";
+document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(suppliertime).toString()+" <br/> ActionBy : test";
+                }
+
+                else if (response.data.Status .includes("Recievd to Transporter")) {
+                    $rootScope.processed = true;
+                    if(transporttime==null){
+                        transporttime = new Date().getTime();
+                    }
+                    document.getElementById("USAID").className = "done";
+                    document.getElementById("NGO").className = "done";
+                    document.getElementById("Supplier").className = "done";
+                    document.getElementById("Transporter").className = "active";
+                    console.log($scope.transportChecklist);
+                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(transporttime).toString()+" <br/> ActionBy : test";
+                }
+                else if (response.data.Status.includes("Recievd to Warehouse")) {
+                    $rootScope.processed = true;
+                    if(warehousetime==null){
+                        warehousetime = new Date().getTime();
+                    }
+                    document.getElementById("USAID").className = "done";
+                    document.getElementById("NGO").className = "done";
+                    document.getElementById("Supplier").className = "done";
+                    document.getElementById("Transporter").className = "done";
+                    document.getElementById("Warehouse").className = "active";
+                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(warehousetime).toString()+" <br/> ActionBy : test";
+                    
+                }
+
+                
 
                 fetchNGO();
 
             }
         }
-
-
-
-
-
-
-
 
 
         $scope.addProduct = function () {
@@ -316,10 +337,10 @@ app.controller('dashboardCtrl',
 
         $scope.recievedTransport = function () {
             $scope.dataLoading = true;
-            if($scope.selection.length== $scope.productList.length){
+            if($scope.selection.length== $scope.transportProductList.length){
                 sel = true;
             }
-            AuthenticationService.recievedTransport($scope.packingLabelList,sel,function (response) {
+            AuthenticationService.recievedTransport($scope.packingLabelList,sel,$scope.TransportComments,function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                     console.log("data entered");
@@ -335,10 +356,10 @@ app.controller('dashboardCtrl',
         var sel;
         $scope.recievedWarehouse = function () {
             $scope.dataLoading = true;
-            if($scope.selection.length== $scope.productList.length){
+            if($scope.selection.length== $scope.warehouseProductList.length){
                 sel = true;
             }
-            AuthenticationService.recievedWarehouse($scope.packingLabelList,sel, function (response) {
+            AuthenticationService.recievedWarehouse($scope.packingLabelList,sel, $scope.WarehouseComments,function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
 
@@ -356,7 +377,6 @@ app.controller('dashboardCtrl',
         $scope.toggleSelection = function toggleSelection(product) {
         
             var idx = $scope.selection.indexOf(product);
-        
             // Is currently selected
             if (idx > -1) {
               $scope.selection.splice(idx, 1);
@@ -370,13 +390,13 @@ app.controller('dashboardCtrl',
 
         $scope.recievedSupplier = function () {
             $scope.dataLoading = true;
-         
+       
 
-            if($scope.selection.length== $scope.productList.length){
+            if($scope.selection.length== $scope.supplierProductList.length){
                 sel = true;
             }
 
-            AuthenticationService.recievedSupplier($scope.packingLabelList,sel, function (response) {
+            AuthenticationService.recievedSupplier($scope.packingLabelList,sel,$scope.Suppliercomments,function (response) {
                 if (response.success) {
                     $rootScope.isSubmitted = true;
                   
@@ -394,6 +414,7 @@ app.controller('dashboardCtrl',
 
         $scope.submitOrder = function() {
             $rootScope.isSubmitted = true;
+            
         }
 
 

@@ -7,10 +7,15 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link rel="stylesheet" href="loginpage.css">
+<link rel="stylesheet" href="transportstyle.css">
 <link rel="stylesheet" href="mystyles.css">
-
-<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehous.jpg'); background-repeat: no-repeat; background-attachment: fixed;
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/warehouse.png'); background-repeat: no-repeat; background-attachment: fixed;
 background-size: cover;" >
+
+<!-- <body ng-app="dashboardApp" ng-controller="dashboardCtrl" > -->
+    <div class=block2>
+        <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+    </div>
 
     <!-- Log in page -->
     <div ng-show="!isLoggedIn && !isRegister">
@@ -22,8 +27,8 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
-                    <input type="button" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -44,7 +49,7 @@ background-size: cover;" >
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
                     
-                    <input type="button" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -58,17 +63,13 @@ background-size: cover;" >
     <!-- END: Log in page -->
     <!-- Main page -->
     <div ng-show="isLoggedIn">
-        <div class="my-side-nav">
-            <!-- <span class="my-icon"><i class=" fas fa-user"></i></span><br/> -->
-            <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
-                        class=" fas fa-power-off"></i></a></span>
-        </div>
+      
         <!-- <div class="my-main-container">
              Logged In
         </div> -->
         <div ng-show="isSubmitted">
             <div class="my-main-container">
-                <h2 > Warehouse Submitted the order!!</h2>
+                <h2 style="color: black;"> Warehouse Submitted the order!!</h2>
             </div>
         </div>
         <!-- <div ng-show="processed">
@@ -83,47 +84,91 @@ background-size: cover;" >
         </div> -->
         <div ng-show="!isSubmitted && !fetched">
             <div class="my-main-container">
-                <h2 style="color: white;"> Warehouse Logged In!!</h2>
-                 <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
+                <div class="my-main-container">
+               
+                    <br>
+    
+                    <div style="height: 80vh; width: 404px; margin:auto;">
+    
+                        <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                            <div class="card-body" style = "width: 93%;
+                            height: 82%;
+                            position: absolute;
+                            overflow: hidden;
+                            top: 65px;
+                    background-color: white;
+                            left: 15px;
+                            padding: 0px 10px;
+                            top: 10 px;
+                            ">
+                <br>
+                 <input  style="width: 50%;"  type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
                  placeholder="packingLabelList">
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                 <br>
+                 <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
                 
-            </div>
+            </div>              
+        </div>
+    </div>
+
+</div>
         </div>
 
         <div ng-show="!isSubmitted && fetched && !processed && !recieved">
             <div class="my-main-container">
-                 <h2 style="text-align: center;">Details Of the Order</h2>
+                <div class="my-main-container">
+               
+                    <br>
+    
+                    <div style="height: 80vh; width: 404px; margin:auto;">
+    
+                        <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                            <div class="card-body" style = "width: 93%;
+                            height: 82%;
+                            position: absolute;
+                            overflow: hidden;
+                            top: 65px;
+                    background-color: white;
+                            left: 15px;
+                            padding: 0px 10px;
+                            top: 10 px;
+                            ">
+                 <h2 style="text-align: center; color: black;">Details Of the Order</h2>
 
                 
 
-                 <table  style="width:100%; color: white;">
+                 <table  style="width:100%; color: black;">
                     <tr>
                       <th>POID</th>
                       <th>ItemType</th>
-                      <th>Qunatity</th>
-                      <th>Price</th>
+                      <th>Quantity</th>
+                      <!-- <th>Price</th> -->
                       <th>Check</th>
-                      
-                      <th>Note</th>
+                  
                     </tr>
                
-                    <tr ng-repeat="product in productList">
+                    <tr ng-repeat="product in warehouseProductList">
                       
                        <td> {{product.poid}}</td>
                       <td> {{product.name}}</td>
                       <td> {{product.qty}}</td>
-                      <td>{{product.price}}</td>
+                      <!-- <td>{{product.price}}</td> -->
                       <td> <input type="checkbox" class = "checkbox" ng-checked="selection.indexOf(product) > -1"
                         ng-click="toggleSelection(product)" id={{product.name}} name={{product.name}} value={{product.name}}></td>
-                      <td> Comments</td>
+                      
                     </tr>
                   </li>
                   </table>
                 
-                
-                 <input type="button" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
-                
+                  <input  style="width: 50%;"  type="text" id="WarehouseComments" name="WarehouseComments" ng-model="WarehouseComments"
+                  placeholder="comments">
+                  <br>
+                 <input type="button" style= "background-color: red;" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
+                              
+            </div>
+        </div>
+
+    </div>
             </div>
         </div>
 
