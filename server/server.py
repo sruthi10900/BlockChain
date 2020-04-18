@@ -9,16 +9,42 @@ poid = 1
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 database = {
     "users": {
-        "test": {
+        
+        "Bob": {
             "password": "test",
             "org": "ORG1",
             "role": "role2"
         },
-        "abc": {
-            "password" : "xyz",
+        "Parker": {
+            "password": "test",
+            "org": "ORG1",
+            "role": "role2"
+        },
+        "Antonio": {
+            "password": "test",
+            "org": "ORG1",
+            "role": "role2"
+        },
+        "Marco": {
+            "password": "test",
+            "org": "ORG1",
+            "role": "role2"
+        },
+        "Bob": {
+            "password": "test",
+            "org": "ORG1",
+            "role": "role2"
+        },
+        "Devin": {
+            "password" : "test",
             "org": "ORG2",
             "role": "role1"
-        }
+        },
+        "Carol": {
+            "password": "test",
+            "org": "ORG1",
+            "role": "role2"
+        },
     },
     "orgs": {
         "ORG1": {
@@ -147,9 +173,12 @@ class AthenticationSupplier(Resource):
         parser.add_argument("password")
         args = parser.parse_args()
         username =  args['username']
+        print(username)
         password = args['password']
+        print(password)
         if username != None and password != None:
             if username not in database['users']:
+                print(username)
                 return {"status":"error", "msg":"Incorrect username and password"}, 201, {'Access-Control-Allow-Origin': '*'}
             if database['users'][username]['password'] == password:
                 print("hello")
