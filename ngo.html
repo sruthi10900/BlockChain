@@ -9,15 +9,16 @@
 <link rel="stylesheet" href="loginpage.css">
 <link rel="stylesheet" href="mystyles.css">
 <link rel="stylesheet" href="transportstyle.css">
+<link rel="stylesheet" href="transport.css">
 
 <!-- <body ng-app="dashboardApp" ng-controller="dashboardCtrl" > -->
 
 
-    <body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/ngo.png'); background-repeat: no-repeat; background-attachment: fixed;
-background-size: cover;" > 
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/ngo.png'); background-repeat: no-repeat; background-attachment: fixed;
+background-size: cover;">
 
     <div class=block2>
-        <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+        <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px" />
     </div>
 
     <!-- Log in page -->
@@ -30,8 +31,12 @@ background-size: cover;" >
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logIn()">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button"
+                        style="background-color:red; color: white; font-weight: bolder; font-size: larger;"
+                        class="fadeIn third" value="Log In" ng-click="logIn()">
+                    <input type="button"
+                        style="background-color:red; color: white; font-weight: bolder; font-size: larger;"
+                        class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -52,7 +57,9 @@ background-size: cover;" >
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
 
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button"
+                        style="background-color:red; color: white; font-weight: bolder; font-size: larger;"
+                        class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -65,52 +72,79 @@ background-size: cover;" >
     <!-- END: Log in page -->
     <!-- Main page -->
     <div ng-show="isLoggedIn">
-        <div class="my-side-nav">
-            <!-- <span class="my-icon"><i class=" fas fa-user"></i></span><br/> -->
+        <!-- <div class="my-side-nav">
+            <span class="my-icon"><i class=" fas fa-user"></i></span><br/>
             <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
                         class=" fas fa-power-off"></i></a></span>
-        </div>
-        <!-- <div class="my-main-container">
+        </div> -->
+        <!-- <div >
              Logged In
         </div> -->
+
         <div ng-show="isSubmitted">
-            <div class="my-main-container">
-                Submitted
+            
+            <div style="right: 10px;" ng-show="isLoggedIn">
+                <div style="height: 80vh; width: 404px; margin:auto;">
+
+                    <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 115%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                        <div class="card-body" style = "width: 115%;
+                        width: 92%;
+        height: 82%;
+        position: absolute;
+        overflow: hidden;
+        top: 65px;
+        background-color: white;
+        left: 15px;
+        padding: 0px 10px;
+                        ">
+                <h2 style="font-size: large; font-weight: bolder; text-align: center;"> {{username}}, your order is successful!!</h2>
+            </div>
+        </div>
+        </div>
             </div>
         </div>
         <div ng-show="!isSubmitted">
-            <div class="my-main-container">
+            <div>
                 <div style="height: 80vh; width: 404px; margin:auto;">
 
-                <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
-                    <div class="card-body" style = "width: 93%;
-                    height: 82%;
-                    position: absolute;
-                    overflow: hidden;
-                    top: 65px;
-                    background-color: white;
-                    left: 15px;
-                    padding: 0px 10px;
-                    top: 10 px;
+                    <div class="card"
+                        style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 115%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                        <div class="card-body" style="width: 115%;
+                    width: 92%;
+    height: 82%;
+    position: absolute;
+    overflow: hidden;
+    top: 65px;
+    background-color: white;
+    left: 15px;
+    padding: 0px 10px;
                     ">
-                    PackingLabelList<br><input type="text" id="username" class="fadeIn first" name="packingLabelList"
-                        ng-model="packingLabelList" placeholder="packingLabelList" size="20" width ="30%"><br>
-                    Ship To<br><input type="text" id="shipTo" class="fadeIn first" name="shipTo" ng-model="shipTo"
-                        placeholder="Ship To" size="20" width ="30%" ng-init="shipTo='Asia'"><br>
-                    Ship Via<br><input type="text" id="shipVia" class="fadeIn first" name="shipVia" ng-model="shipVia"
-                        placeholder="Ship Via" size="20" width ="30%" ng-init="shipVia='Africa'"><br>
-                    <div id="dynamicInput">
-                        Item Type<br><input type="text" id="itemType" class="fadeIn first" name="itemType"
-                            ng-model="itemType" placeholder="Item Type" size="20" width ="30%" ng-init="itemType='Medicine'"><br>
-                        Quantity<br><input type="text" id="qty" class="fadeIn first" name="qty" ng-model="qty"
-                            placeholder="Quantity" size="3" width ="30%"><br>
-                        Price <br> <input type="text" id="price" class="fadeIn first" name="price" ng-model="price"
-                            placeholder="Price" size="5" width ="30%">
+
+
+                            PackingLabelList<br><input type="text" id="username" class="fadeIn first"
+                                name="packingLabelList" ng-model="packingLabelList" placeholder="packingLabelList"
+                                size="20" width="30%"><br>
+                            Ship To<br><input type="text" id="shipTo" class="fadeIn first" name="shipTo"
+                                ng-model="shipTo" placeholder="Ship To" size="20" width="30%"
+                                ng-init="shipTo='Asia'"><br>
+                            Ship Via<br><input type="text" id="shipVia" class="fadeIn first" name="shipVia"
+                                ng-model="shipVia" placeholder="Ship Via" size="20" width="30%"
+                                ng-init="shipVia='Africa'"><br>
+                            <div id="dynamicInput">
+                                Item Type<br><input type="text" id="itemType" class="fadeIn first" name="itemType"
+                                    ng-model="itemType" placeholder="Item Type" size="20" width="30%"
+                                    ng-init="itemType='Amoxicillin'"><br>
+                                Quantity<br><input type="text" id="qty" class="fadeIn first" name="qty" ng-model="qty"
+                                    placeholder="Quantity" size="3" width="30%"><br>
+                                Price <br> <input type="text" id="price" class="fadeIn first" name="price"
+                                    ng-model="price" placeholder="Price" size="5" width="30%">
+                            </div>
+                            <input type="button"
+                                style="background-color:red; color: white; font-weight: bolder; font-size: larger;"
+                                font-size: larger;" class="fadeIn third" value="Submit" ng-click="addProduct()">
+                        </div>
                     </div>
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="addProduct()">
                 </div>
-            </div>
-            </div>
             </div>
         </div>
 

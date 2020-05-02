@@ -27,13 +27,13 @@ ol.progress[data-steps="9"] li { width: 11%; }
     text-align: center;
     margin-bottom: 1em;
     color: black;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .progress .step {
     color: black;
-    border: 3px solid silver;
-    background-color: silver;
+    border: 3px solid orange;
+    background-color: orange;
     border-radius: 50%;
     line-height: 1.2;
     width: 1.2em;
@@ -47,14 +47,16 @@ ol.progress[data-steps="9"] li { width: 11%; }
 }
 
 .progress .active .name,
-.progress .active .step span {
+.progress .active .step span,
+.progress .error .name,
+.progress .error .step span {
     opacity: 1;
 }
 
-.progress .step:before {
+/* .progress .step:before {
     content: "";
     display: block;
-    background-color: silver;
+    background-color: orange;
     height: 0.4em;
     width: 50%;
     position: absolute;
@@ -66,14 +68,14 @@ ol.progress[data-steps="9"] li { width: 11%; }
 .progress .step:after {
     content: "";
     display: block;
-    background-color: silver;
+    background-color: orange;
     height: 0.4em;
     width: 50%;
     position: absolute;
     bottom: 0.6em;
     right: 0;
     z-index: -1;
-}
+} */
 
 .progress li:first-of-type .step:before {
     display: none;
@@ -83,11 +85,11 @@ ol.progress[data-steps="9"] li { width: 11%; }
     display: none;
 }
 
-.done .step,
+/* .done .step,
 .done .step:before,
 .done .step:after,
 .active .step,
- .active .step:before {
+.progress .active .step:before {
     background-color: yellowgreen;
 }
 
@@ -96,11 +98,13 @@ ol.progress[data-steps="9"] li { width: 11%; }
 .done .step,
  .active .step {
     border: 3px solid yellowgreen;
-}
+} */
 
 
 .progress .error .step,
-.progress .error .step:before
+.progress #Supplier.error .step:before,
+.progress #Transporter.error .step:before,
+.progress #Warehouse.error .step:before
 {
 
     background-color: red;
@@ -113,39 +117,177 @@ ol.progress[data-steps="9"] li { width: 11%; }
 }
 
 
-/* #USAID .done .step:after{
+.progress #USAID.done .step:after,
+.progress #NGO.done .step:before,
+.progress #NGO.done .step:after,
+.progress #Supplier.done .step:before,
+.progress #Supplier.done .step:after,
+.progress #Transporter.done .step:before,
+.progress #Transporter.done .step:after,
+.progress #Warehouse.done .step:before,
+.progress #Warehouse.done .step:after,
+.progress #USAID.active .step:after,
+ .progress #NGO.active .step:before,
+ .progress #NGO.active .step:after,
+ .progress #Transporter.active .step:before,
+ .progress #Transporter.active .step:after,
+ .progress #Warehouse.active .step:before,
+ .progress #Warehouse.active .step:after,
+ .progress #Supplier.active .step:before,
+ .progress #Supplier.active .step:after
+ {
     background-color: yellowgreen;
-    border: 3px solid yellowgreen;
     }
-#USAID .step:after{
-    content: "";
-    display: block;
-    background-color: silver;
-    height: 0.4em;
-    width: 77%;
+
+
+    
+   .progress #USAID .step:after{
+        content: "";
+        display: block;
+        background-color: orange;
+        height: 0.4em;
+    width: 88%;
     position: absolute;
     bottom: 0.6em;
     right: -44px;
     z-index: -1;
-    transform: rotate(45deg);
+    transform: rotate(47deg);
     transform-origin: 0% 0%;
-}
- #NGO.active .step:before{
-    border: 3px solid yellowgreen;
-    background-color: yellowgreen;
     }
 
-  #NGO.step:before{
+  .progress #NGO .step:before{
     content: "";
     display: block;
-    background-color: silver;
+    background-color: orange;
     height: 0.4em;
-    width: 53%;
+    width: 72%;
     position: absolute;
     bottom: 1.6em;
-    top: 75px; 
+    top: 16px;
+    left: -11px;
+    z-index: -1;
+    transform: rotate(50deg);
+    transform-origin: 57% 0%;
+} 
+
+
+
+.progress #NGO .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 62%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -22px;
+    z-index: -1;
+    transform: rotate(79deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Supplier .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 64%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 5px;
+    left: 9px;
+    z-index: -1;
+    transform: rotate(78deg);
+    transform-origin: 60% 41%;
+} 
+
+.progress #Supplier .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 138%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -110px;
+    z-index: -1;
+    transform: rotate(-39deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Transporter .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 91%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -54px;
+    top: 49px;
+    z-index: -1;
+    transform: rotate(140deg);
+    transform-origin: 0% 0%;
+
+} 
+
+
+.progress #Transporter .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 73%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -28px;
+    z-index: -1;
+    transform: rotate(-46deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Warehouse .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 69%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 73px;
+    left: -21px;
+    z-index: -1;
+    transform: rotate(-45deg);
+    transform-origin: 60% 41%;
+} 
+
+.progress #Warehouse .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
+    right: 0;
+    z-index: -1;
+}
+
+.progress #User .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
     left: 0;
     z-index: -1;
-    transform: rotate(13deg);
-    transform-origin: 0% 0%;
-} */
+} 
+
+
+.done .step,
+ .active .step {
+    border: 3px solid yellowgreen;
+    background-color: yellowgreen;
+}

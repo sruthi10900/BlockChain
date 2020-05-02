@@ -20,7 +20,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
 
           
            
-            // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
+            // $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po4contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\'909\']", config).then(function(response){
             //     callback(response);
             // });
 
@@ -50,8 +50,9 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                   'Authorization': 'Bearer '+$rootScope.token
                 }
               };
+          
               var x = packingLabelList.toString();
-            $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://34.95.15.17:4000/channels/commonchannel/chaincodes/po4contract?fcn=read&peer=peer0.machine1.transporter.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 success = true;
@@ -84,7 +85,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 }
               };
               var x = packingLabelList.toString();
-            $http.get("http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.warehouse.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://35.203.75.224:4000/channels/commonchannel/chaincodes/po4contract?fcn=read&peer=peer0.machine1.warehouse.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
                 
@@ -120,7 +121,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 }
               };
               var x = packingLabelList.toString();
-            $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
+            $http.get("http://35.203.91.138:4000/channels/commonchannel/chaincodes/po4contract?fcn=read&peer=peer0.machine1.supplier.example.com&args=[\""+x+"\"]", config).then(function(response){
                 if(response.status == 200){
                     console.log(response);
 
@@ -212,7 +213,7 @@ app.service('AuthenticationService',['$http', '$cookies', '$rootScope',
                 "args":[packingLabelList,"Digital Vibes","12/02/2020",shipTo,"NGOTo",shipVia,"MTransports","Null","1 day","13/02/2020",
                 "1",JSON.stringify((product)),quantity,"15","17","15","2","Null","Null","None","Submitted"]
                 });
-            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
+            $http.post('http://34.95.28.214:4000/channels/commonchannel/chaincodes/po4contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -264,7 +265,7 @@ var parameter1 = JSON.stringify({
 }
 
 
-            $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
+            $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po4contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -272,7 +273,7 @@ var parameter1 = JSON.stringify({
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
-                if(!sel){ $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+                if(!sel){ $http.post('http://34.95.15.17:4000/channels/commonchannel/chaincodes/po4contract', parameter1,config).then(function(response) {
                     // First function handles success
                     // $scope.content = response.data;
                     console.log(response);
@@ -327,7 +328,7 @@ var parameter1 = JSON.stringify({
 
         }
 
-            $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
+            $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po4contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
         
@@ -336,7 +337,7 @@ var parameter1 = JSON.stringify({
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
-                if(!sel){  $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+                if(!sel){  $http.post('http://35.203.75.224:4000/channels/commonchannel/chaincodes/po4contract', parameter1,config).then(function(response) {
                     console.log(response);
                   });
                 }
@@ -385,7 +386,7 @@ var parameter1 = JSON.stringify({
 }
 
 
-            $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract', parameter,config).then(function(response) {
+            $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po4contract', parameter,config).then(function(response) {
                 // First function handles success
                 // $scope.content = response.data;
                 console.log(response);
@@ -393,7 +394,7 @@ var parameter1 = JSON.stringify({
                     console.log(response.data.success);
                 success = true;
                 message = "Submit succes";
-               if(!sel){ $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po3contract', parameter1,config).then(function(response) {
+               if(!sel){ $http.post('http://35.203.91.138:4000/channels/commonchannel/chaincodes/po4contract', parameter1,config).then(function(response) {
                     // First function handles success
                     // $scope.content = response.data;
                     console.log(response);

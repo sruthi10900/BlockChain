@@ -21,8 +21,8 @@
                         placeholder="Username">
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Log In" ng-click="logInWarehouse()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
                     
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -62,37 +62,37 @@
             <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
                         class=" fas fa-power-off"></i></a></span>
         </div>
-        <!-- <div class="my-main-container">
+        <!-- <div >
              Logged In
         </div> -->
         <div ng-show="isSubmitted">
-            <div class="my-main-container">
+            <div >
                  Submitted
             </div>
         </div>
         <div ng-show="processed">
-            <div class="my-main-container">
+            <div >
                 Already Processed
             </div>
         </div>
         <div ng-show="recieved">
-            <div class="my-main-container">
+            <div >
                 Cant be accessed at this moment
             </div>
         </div>
         <div ng-show="!isSubmitted && !fetched">
-            <div class="my-main-container">
+            <div >
                  Warehouse Logged In!!
                  Fetching Details
                  <input type="text" id="packingLabelList" class="fadeIn second" name="packingLabelList" ng-model="packingLabelList"
                  placeholder="packingLabelList">
-                 <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
+                 <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsWarehouse()">
                 
             </div>
         </div>
 
         <div ng-show="!isSubmitted && fetched && !processed && !recieved">
-            <div class="my-main-container">
+            <div >
                  Details Of the POID
                  <table style="width:100%">
                     <tr>
@@ -111,7 +111,7 @@
                     </tr>
                   
                   </table>
-                 <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
+                 <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Confirm Order" ng-click="recievedWarehouse()">
                 
             </div>
         </div>

@@ -14,6 +14,11 @@
     <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
 </div>
 
+
+<div style="right: 10px;" ng-show = "isLoggedIn" >
+    <h2> Welcome, {{username}}</h2>
+</div>
+
     <div ng-show="!isLoggedIn && !isRegister">
         <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
             <div id="formContent">
@@ -21,10 +26,10 @@
                 <div>
                     <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
                         placeholder="Username">
-                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                    <input type="password" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger"; class="fadeIn third" value="Log In" ng-click="logInSupplier()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger"; class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -45,7 +50,7 @@
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
 
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -71,18 +76,19 @@
                     ng-model="packingLabelList" placeholder="project ID">
                 <br>
                 <br>
-                <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsNGO()">
+                <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="fetchDetailsNGO()">
 
             </div>
         </div>
 
 
-        <div ng-show="fetched">
-            <div class="my-main-container">
-                <div >
-                    <h2 style="color: black;">
+        <div ng-show="fetched" >
+            <div class="my-main-container" style="height: 700px; z-index: -3; background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/map.png'); background-repeat: no-repeat; background-attachment: fixed;
+            background-size: cover;" >
+                <div  >
+                    <!-- <h2 style="color: black;">
                         Track your Order
-                    </h2>
+                    </h2> -->
                     <br>
 
 
@@ -96,15 +102,17 @@
 
                         </li>
 
-                        <li id="NGO">
+                        <li id="NGO" style="top:150px">
                             <span class="name">NGO</span>
                             <span class="step"><span>2</span></span>
+                            <!-- <span id = "USAIDdata"></span> -->
                         </li>
-                        <li id="Supplier">
+                        <li id="Supplier" style="top: 312px;left: -93px;">
                             <span class="name">Supplier</span>
                             <span class="step"><span>3</span></span>
+                            <!-- <span id = "NGOdata"></span> -->
                         </li>
-                        <li id="Transporter">
+                        <li id="Transporter" style="top: 128px;">
                             <span class="name">Transporter</span>
                             <span class="step"><span>4</span></span>
                         </li>
@@ -126,13 +134,13 @@
                         <li id = "USAIDdata">
                           
                         </li>
-                        <li id = "NGOdata">
+                        <li id = "NGOdata" style="top:150px; right:50px">
                             
                         </li>
-                        <li id = "Supplierdata">
+                        <li id = "Supplierdata" style="top: 312px;left: -93px;">
                             
                         </li>
-                        <li  id = "Transportdata">
+                        <li  id = "Transportdata"  style="top: 128px;">
                           
                         </li>
                         <li  id = "Warehousedata">

@@ -1,0 +1,290 @@
+ol.progress[data-steps="2"] li { width: 49%; }
+ol.progress[data-steps="3"] li { width: 33%; }
+ol.progress[data-steps="4"] li { width: 24%; }
+ol.progress[data-steps="5"] li { width: 19%; }
+ol.progress[data-steps="6"] li { width: 16%; }
+ol.progress[data-steps="7"] li { width: 14%; }
+ol.progress[data-steps="8"] li { width: 12%; }
+ol.progress[data-steps="9"] li { width: 11%; }
+
+.progress {
+    width: 100%;
+    list-style: none;
+    list-style-image: none;
+    margin: 20px 0 20px 0;
+    padding: 0;
+}
+
+.progress li {
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.progress .name {
+    display: block;
+    vertical-align: bottom;
+    text-align: center;
+    margin-bottom: 1em;
+    color: black;
+    opacity: 0.5;
+}
+
+.progress .step {
+    color: black;
+    border: 3px solid orange;
+    background-color: orange;
+    border-radius: 50%;
+    line-height: 1.2;
+    width: 1.2em;
+    height: 1.2em;
+    display: inline-block;
+    z-index: 0;
+}
+
+.progress .step span {
+    opacity: 0.3;
+}
+
+.progress .active .name,
+.progress .active .step span {
+    opacity: 1;
+}
+
+/* .progress .step:before {
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
+    left: 0;
+    z-index: -1;
+}
+
+.progress .step:after {
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
+    right: 0;
+    z-index: -1;
+} */
+
+.progress li:first-of-type .step:before {
+    display: none;
+}
+
+.progress li:last-of-type .step:after {
+    display: none;
+}
+
+/* .done .step,
+.done .step:before,
+.done .step:after,
+.active .step,
+.progress .active .step:before {
+    background-color: yellowgreen;
+}
+
+
+
+.done .step,
+ .active .step {
+    border: 3px solid yellowgreen;
+} */
+
+
+.progress .error .step,
+.progress #Supplier.error .step:before,
+.progress #Transporter.error .step:before,
+.progress #Warehouse.error .step:before
+
+{
+
+    background-color: red;
+}
+
+.progress .error .step
+{
+    border: 3px solid red;
+  
+}
+
+
+.progress #USAID.done .step:after,
+.progress #NGO.done .step:before,
+.progress #NGO.done .step:after,
+.progress #Supplier.done .step:before,
+.progress #Supplier.done .step:after,
+.progress #Transporter.done .step:before,
+.progress #Transporter.done .step:after,
+.progress #Warehouse.done .step:before,
+.progress #Warehouse.done .step:after,
+.progress #USAID.active .step:after,
+ .progress #NGO.active .step:before,
+ .progress #NGO.active .step:after,
+ .progress #Transporter.active .step:before,
+ .progress #Transporter.active .step:after,
+ .progress #Warehouse.active .step:before,
+ .progress #Warehouse.active .step:after,
+ .progress #Supplier.active .step:before,
+ .progress #Supplier.active .step:after
+ {
+    background-color: yellowgreen;
+    }
+
+   .progress #USAID .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 66%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -44px;
+    z-index: -1;
+    transform: rotate(35deg);
+    transform-origin: 0% 0%;
+    }
+
+  .progress #NGO .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 22px;
+    left: -1px;
+    z-index: -1;
+    transform: rotate(27deg);
+    transform-origin: 57% 0%;
+} 
+
+
+
+.progress #NGO .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 47%;
+    position: absolute;
+    bottom: 0.6em;
+    right: 4px;
+    z-index: -1;
+    transform: rotate(43deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Supplier .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 44%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 5px;
+    left: 23px;
+    z-index: -1;
+    transform: rotate(47deg);
+    transform-origin: 60% 41%;
+} 
+
+.progress #Supplier .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 89%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -105px;
+    z-index: -1;
+    transform: rotate(-52deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Transporter .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 86%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 383px;
+    left: 96px;
+    /* right: 160px; */
+    z-index: -1;
+    transform: rotate(-55deg);
+    transform-origin: -87% 56%;
+} 
+
+
+.progress #Transporter .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 74%;
+    position: absolute;
+    bottom: 0.6em;
+    right: -54px;
+    z-index: -1;
+    transform: rotate(6deg);
+    transform-origin: 0% 0%;
+}
+
+.progress #Warehouse .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 71%;
+    position: absolute;
+    bottom: 1.6em;
+    top: 32px;
+    left: -49px;
+    z-index: -1;
+    transform: rotate(9deg);
+    transform-origin: 60% 41%;
+} 
+
+.progress #Warehouse .step:after{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
+    right: 0;
+    z-index: -1;
+}
+
+.progress #User .step:before{
+    content: "";
+    display: block;
+    background-color: orange;
+    height: 0.4em;
+    width: 50%;
+    position: absolute;
+    bottom: 0.6em;
+    left: 0;
+    z-index: -1;
+} 
+
+
+.done .step,
+ .active .step {
+    border: 3px solid yellowgreen;
+    background-color: yellowgreen;
+}

@@ -217,7 +217,7 @@ app.controller('dashboardCtrl',
                 $scope.time = 0;
 
 
-                $timeout(function() {callAtTimeout(response)}, 5000);
+                $timeout(function() {callAtTimeout(response)}, 1000);
 
             });
            
@@ -227,7 +227,7 @@ app.controller('dashboardCtrl',
 
                     document.getElementById("USAID").className = "active";
                   
-                    document.getElementById("USAIDdata").innerHTML = new Date().toString()+"<br />" +"Amount : $10000 <br/> ActionBy : test";
+                    document.getElementById("USAIDdata").innerHTML = new Date().toLocaleString()+"<br />" +"Amount : $10000 <br/> ActionBy : Parker";
                 }
 
                 else if (response.message =="Submit succes" && response.data.Status.includes("Submitted")) {
@@ -237,7 +237,7 @@ app.controller('dashboardCtrl',
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "active";
                   
-                    document.getElementById("NGOdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date((time)).toString()+" <br/> ActionBy : test";
+                    document.getElementById("NGOdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date((time)).toLocaleString()+" <br/> ActionBy : Antonio";
                 }
                 else if (response.data.Status.includes("Recievd  to Supplier with Items Missing")) {
                     if(suppliertime==null){
@@ -247,7 +247,7 @@ app.controller('dashboardCtrl',
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "error";
-                    document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +' Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(suppliertime).toString()+" <br/> ActionBy : test";
+                    document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +' Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(suppliertime).toLocaleString()+" <br/> ActionBy : Marco";
                 }
 
                 else if (response.data.Status.includes("Recievd  to Transporter with Items Missing")) {
@@ -259,7 +259,7 @@ app.controller('dashboardCtrl',
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "error";
-                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(transporttime).toString()+" <br/> ActionBy : test";
+                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +'\n\n Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(transporttime).toLocaleString()+" <br/> ActionBy : Devin";
                 }
 
                 else if (response.data.Status.includes("Recievd  to Warehouse with Items Missing")) {
@@ -272,7 +272,7 @@ app.controller('dashboardCtrl',
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "done";
                     document.getElementById("Warehouse").className = "error";
-                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br /><br/>" +'Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(warehousetime).toString()+" <br/> ActionBy : test";
+                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br /><br/>" +'Comments : '+(response.data.Comments)+"<br />" +"    "+new Date(warehousetime).toLocaleString()+" <br/> ActionBy : Carol";
                 }
                 else if (response.data.Status.includes("Recievd to Supplier")) {
                     if(suppliertime==null){
@@ -282,7 +282,7 @@ app.controller('dashboardCtrl',
                     document.getElementById("USAID").className = "done";
                     document.getElementById("NGO").className = "done";
                     document.getElementById("Supplier").className = "active";
-document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(suppliertime).toString()+" <br/> ActionBy : test";
+document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(suppliertime).toLocaleString()+" <br/> ActionBy : Marco";
                 }
 
                 else if (response.data.Status .includes("Recievd to Transporter")) {
@@ -295,7 +295,7 @@ document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(respo
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "active";
                     console.log($scope.transportChecklist);
-                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(transporttime).toString()+" <br/> ActionBy : test";
+                    document.getElementById("Transportdata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(transporttime).toLocaleString()+" <br/> ActionBy : Devin";
                 }
                 else if (response.data.Status.includes("Recievd to Warehouse")) {
                     $rootScope.processed = true;
@@ -307,7 +307,7 @@ document.getElementById("Supplierdata").innerHTML = 'Product: '+JSON.parse(respo
                     document.getElementById("Supplier").className = "done";
                     document.getElementById("Transporter").className = "done";
                     document.getElementById("Warehouse").className = "active";
-                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(warehousetime).toString()+" <br/> ActionBy : test";
+                    document.getElementById("Warehousedata").innerHTML = 'Product: '+JSON.parse(response.data.ProductName)[0].name+"<br />" +'\n Quantity : '+JSON.parse(response.data.ProductName)[0].qty+"<br />" +"    "+new Date(warehousetime).toLocaleString()+" <br/> ActionBy : Carol";
                     
                 }
 

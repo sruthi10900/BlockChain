@@ -1,6 +1,6 @@
 .my-main-container {
     position: absolute;
-    left: 50px;
+    /* left: 50px; */
     width: calc(100vw - 50px);
     padding: 10px;
 }

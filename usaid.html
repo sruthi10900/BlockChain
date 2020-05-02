@@ -22,10 +22,10 @@ background-size: cover;" >
                 <div>
                     <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
                         placeholder="Username">
-                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                    <input type="password" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Log In" ng-click="logIn()">
-                    <input type="button" style="background-color:red" class="fadeIn third" value="New User" ng-click="register()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Log In" ng-click="logIn()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="New User" ng-click="register()">
 
                 </div>
             </div>
@@ -46,7 +46,7 @@ background-size: cover;" >
                     <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
                         placeholder="Password">
                     
-                    <input type="button" style="background-color:red" class="fadeIn third" value="Submit" ng-click="submit()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="submit()">
 
                 </div>
             </div>
@@ -56,47 +56,85 @@ background-size: cover;" >
 
 
 
-
     <!-- END: Log in page -->
     <!-- Main page -->
     <div ng-show="isLoggedIn">
-        <div class="my-side-nav">
-            <!-- <span class="my-icon"><i class=" fas fa-user"></i></span><br/> -->
+        <!-- <div class="my-side-nav">
+            <span class="my-icon"><i class=" fas fa-user"></i></span><br/>
             <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
                         class=" fas fa-power-off"></i></a></span>
-        </div>
-        <!-- <div class="my-main-container">
+        </div> -->
+        <!-- <div >
              Logged In
         </div> -->
         <div ng-show="isSubmitted">
-            <div class="my-main-container">
-                
-                Donor initiated the order!!
+            <div >
+                <div style="height: 80vh; width: 404px; margin:auto;">
+    
+                    <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                        <div class="card-body" style="width: 79%;
+                        height: 81%;
+                        position: absolute;
+                        overflow: hidden;
+                        top: 65px;
+                background-color: white;
+                        left: 15px;
+                        padding: 0px 10px;
+                        top: 10 px;
+                        ">
+                <br>
+                <br>
+                <h2 style="text-align: center; color: black; font-size: larger;"> Thanks for ordering , {{username}} !!</h2>
             </div>
         </div>
+    </div>
+</div>
+</div>
         <!-- <div ng-show="processed">
-            <div class="my-main-container">
+            <div >
                 Already Processed
             </div>
         </div> -->
         <!-- <div ng-show="recieved">
-            <div class="my-main-container">
+            <div >
                 Cant be accessed at this moment
             </div>
         </div> -->
         <div ng-show="!isSubmitted && !fetched">
-            <div class="my-main-container">
-                <h2 style="color: black;"> Donor Logged In!!</h2>
+            <div >
+                <div style="height: 80vh; width: 404px; margin:auto;">
+    
+                    <div class="card" style="background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/mobile.png'); height: 100%; background-color: transparent; background-size: contain; background-repeat: no-repeat;">
+                        <div class="card-body" style="width: 79%;
+                        height: 81%;
+                        position: absolute;
+                        overflow: hidden;
+                        top: 65px;
+                background-color: white;
+                        left: 15px;
+                        padding: 0px 10px;
+                        top: 10 px;
+                        ">
+      
+    <div style="right: 10px;" ng-show = "isLoggedIn" >
+        <h2> Welcome, {{username}}</h2>
+    </div>
+
+    <br>
+    <br>
+                <!-- <h2 style="color: black;"> Donor Logged In!!</h2> -->
                 <br>
-                <input type="text" id="name" class="fadeIn second" name="name" ng-model="name"
-                 placeholder="name" style="width: 20%;">
+               Amount(in $)<br>
                  <input type="text" id="payAmount" class="fadeIn second" name="payAmount" ng-model="payAmount"
-                 placeholder="payAmount" style="width: 20%;">
-                 <input type="button" style="background-color:red" class="fadeIn third" value="Confirm Order" ng-click="submitOrder()">
+                 placeholder="payAmount" ng-init="payAmount='10000'" ><br><br>
+                 <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="submitOrder()">
                 
             </div>
         </div>
+    </div>
+</div>
 
+</div>
         
 
     <!-- END: Main page -->

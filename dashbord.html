@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-cookies.min.js"></script>
+
+
+
+<link rel="stylesheet" href="dashbord.css">
+<link rel="stylesheet" href="transport.css">
+<link rel="stylesheet" href="transportstyle.css">
+
+<body ng-app="dashboardApp" ng-controller="dashboardCtrl">
+<div class=block2>
+    <img ng-src="/Users/sruthi/Desktop/blockchain/BlockChain/images/asu.png" height="80 px" width="100 px"/>
+</div>
+
+    <div ng-show="!isLoggedIn && !isRegister">
+        <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
+            <div id="formContent">
+                <h2>BlockChain</h2>
+                <div>
+                    <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
+                        placeholder="Username">
+                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                        placeholder="Password">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Log In" ng-click="logInSupplier()">
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="New User" ng-click="register()">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!isLoggedIn && isRegister">
+        <div class="wrapper fadeInDown" style="height:80vh;width:100vw">
+            <div id="formContent">
+                <h2>BlockChain</h2>
+                <div>
+                    <input type="text" id="fname" class="fadeIn first" name="fname" ng-model="fname"
+                        placeholder="FirstName">
+                    <input type="text" id="lname" class="fadeIn second" name="lname" ng-model="lname"
+                        placeholder="LastName">
+                    <input type="text" id="username" class="fadeIn first" name="username" ng-model="username"
+                        placeholder="Username">
+                    <input type="text" id="password" class="fadeIn second" name="password" ng-model="password"
+                        placeholder="Password">
+
+                    <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Submit" ng-click="submit()">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="isLoggedIn">
+        <!-- <div class="my-side-nav">
+            <span class="my-icon"><i class=" fas fa-user"></i></span><br/>
+            <span class="my-icon"><a href="javascript:void()" ng-click="logOut()"><i
+                        class=" fas fa-power-off"></i></a></span>
+        </div> -->
+        <!-- <div >
+             Logged In
+        </div> -->
+
+        <div ng-show="!isSubmitted && !fetched">
+            <div >
+
+                <br>
+                <br>
+                <input type="text" id="packingLabelList" width=50%  class="fadeIn second" name="packingLabelList"
+                    ng-model="packingLabelList" placeholder="project ID">
+                <br>
+                <br>
+                <input type="button" style="background-color:red; color: white; font-weight: bolder; font-size: larger;" class="fadeIn third" value="Confirm Order" ng-click="fetchDetailsNGO()">
+
+            </div>
+        </div>
+
+
+        <div ng-show="fetched" >
+            <div  style="height: 700px; z-index: -3; background-image: url('/Users/sruthi/Desktop/blockchain/BlockChain/images/map.png'); background-repeat: no-repeat; background-attachment: fixed;
+            background-size: cover;" >
+                <div  >
+                    <h2 style="color: black;">
+                        Track your Order
+                    </h2>
+                    <br>
+
+
+                    <br>
+                    <br>
+                    <br>
+                    <ol class="progress" data-steps="6">
+                        <li id="USAID">
+                            <span class="name">USAID</span>
+                            <span class="step"><span>1</span></span>
+
+                        </li>
+
+                        <li id="NGO" style="top:150px">
+                            <span class="name">NGO</span>
+                            <span class="step"><span>2</span></span>
+                            <!-- <span id = "USAIDdata"></span> -->
+                        </li>
+                        <li id="Supplier" style="top: 312px;left: -93px;">
+                            <span class="name">Supplier</span>
+                            <span class="step"><span>3</span></span>
+                            <!-- <span id = "NGOdata"></span> -->
+                        </li>
+                        <li id="Transporter" style="top: -48px;left: -93px;">
+                            <span class="name">Transporter</span>
+                            <span class="step"><span>4</span></span>
+                        </li>
+                        <li id="Warehouse">
+                            <span class="name">Warehouse</span>
+                            <span class="step"><span>5</span></span>
+                        </li>
+                        <li id="User">
+                            <span class="name">User</span>
+                            <span class="step"><span>6</span></span>
+                        </li>
+                    </ol>
+                </div>
+                <div>
+<br>
+<br>
+<br>
+                    <ol class="progress" data-steps="6">
+                        <li id = "USAIDdata">
+                          
+                        </li>
+                        <li id = "NGOdata" style="top:150px">
+                            
+                        </li>
+                        <li id = "Supplierdata" style="top: 312px;left: -93px;">
+                            
+                        </li>
+                        <li  id = "Transportdata"  style="top: -48px;left: -93px;">
+                          
+                        </li>
+                        <li  id = "Warehousedata">
+                            
+                        </li>
+                        <li  id = "Userdata">
+                         
+                        </li>
+                    </ol>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="dashboardApp.js"></script>
+    <script src="authenticationService.js"></script>
+    <script src="dashboardController.js"></script>
+    <script src="ngoService.js"></script>
+    <!-- Boot strap js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+
+    <script>
+        function myFunction() {
+            console.log("gie");
+            document.getElementsByClassName("active")[0].className = "done";
+            document.getElementsByClassName("notStarted")[0].className = "active";
+        }
+
+        function myFunctionTimer() {
+            myVar = setInterval(alertFunc, 3000);
+        }
+
+        function alertFunc() {
+            alert("Hello!");
+        }
+    </script>
+</body>
+
+</html>
